@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Removedor de Duplicatas - masterBank</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 20px 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .format-info {
+            background-color: #eef2ff;
+            border-left: 4px solid #667eea;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 1000px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .input-section, .duplicates-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #333;
+            border-bottom: 2px solid #eef2ff;
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 8px;
+            color: #667eea;
+        }
+        
+        .input-area {
+            margin-bottom: 20px;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 300px;
+            padding: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            resize: vertical;
+            line-height: 1.4;
+        }
+        
+        .options-panel {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .option-group {
+            margin-bottom: 15px;
+        }
+        
+        .option-group h4 {
+            margin-bottom: 10px;
+            color: #555;
+            font-size: 1rem;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+        
+        .checkbox-label input {
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .btn-primary {
+            background-color: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #5a67d8;
+        }
+        
+        .btn-danger {
+            background-color: #e53e3e;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c53030;
+        }
+        
+        .btn-success {
+            background-color: #48bb78;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #38a169;
+        }
+        
+        .btn-warning {
+            background-color: #ecc94b;
+            color: #744210;
+        }
+        
+        .btn-warning:hover {
+            background-color: #d69e2e;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .stats {
+            background-color: #e2e8f0;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .stats span {
+            font-weight: bold;
+            color: #2d3748;
+        }
+        
+        .duplicates-list {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .duplicate-group {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            background-color: #fff;
+        }
+        
+        .group-header {
+            background-color: #fed7d7;
+            padding: 12px 15px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: #c53030;
+            border-bottom: 1px solid #feb2b2;
+        }
+        
+        .group-header i {
+            margin-right: 5px;
+        }
+        
+        .group-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .group-actions button {
+            padding: 5px 12px;
+            font-size: 0.85rem;
+        }
+        
+        .question-items {
+            padding: 10px;
+        }
+        
+        .question-item {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .question-item:last-child {
+            border-bottom: none;
+        }
+        
+        .question-item input[type="checkbox"] {
+            margin-top: 3px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .question-content {
+            flex: 1;
+        }
+        
+        .question-text {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+        
+        .alternatives-preview {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .question-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+        
+        .correct-badge {
+            background-color: #c6f6d5;
+            color: #22543d;
+            padding: 2px 8px;
+            border-radius: 12px;
+            display: inline-block;
+            font-size: 0.75rem;
+        }
+        
+        .no-duplicates {
+            text-align: center;
+            padding: 40px 20px;
+            color: #888;
+            font-size: 1.1rem;
+        }
+        
+        .no-duplicates i {
+            font-size: 3rem;
+            color: #cbd5e0;
+            margin-bottom: 15px;
+        }
+        
+        .alert {
+            padding: 12px 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .similarity-info {
+            background-color: #ebf4ff;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 0.9rem;
+            border-left: 3px solid #4299e1;
+        }
+        
+        .similarity-info i {
+            color: #4299e1;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-clone"></i> Removedor de Duplicatas masterBank</h1>
+            <p class="subtitle">Identifique e remova questões duplicadas considerando variações de acentos, pontuação e formatação</p>
+        </header>
+        
+        <div class="format-info">
+            <p><strong>Formato masterBank:</strong> <code>{q: "Pergunta?", a: ["Opção A", "Opção B", "Opção C", "Opção D"], c: 0}</code></p>
+            <p><strong>Detecção inteligente:</strong> Ignora diferenças de acentos, maiúsculas/minúsculas, pontuação, espaços extras e palavras irrelevantes</p>
+        </div>
+        
+        <div class="alert alert-success" id="successAlert">
+            <i class="fas fa-check-circle"></i> <span id="successMessage"></span>
+        </div>
+        
+        <div class="alert alert-error" id="errorAlert">
+            <i class="fas fa-exclamation-triangle"></i> <span id="errorMessage"></span>
+        </div>
+        
+        <div class="main-content">
+            <!-- Coluna de Entrada -->
+            <div class="input-section">
+                <h2 class="section-title"><i class="fas fa-paste"></i> Entrada de Dados</h2>
+                
+                <div class="input-area">
+                    <label for="jsonInput">Cole suas questões no formato masterBank (array JSON):</label>
+                    <textarea id="jsonInput" placeholder='[
+  {q: "Qual é a capital do Brasil?", a: ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"], c: 2},
+  {q: "Qual é a capital do Brasil?", a: ["São Paulo", "Rio de Janeiro", "Brasilia", "Salvador"], c: 2}
+]'></textarea>
+                </div>
+                
+                <div class="options-panel">
+                    <h4><i class="fas fa-sliders-h"></i> Opções de Comparação</h4>
+                    
+                    <div class="option-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="ignoreAccents" checked>
+                            <span>Ignorar acentos (ã, ç, é, í, ó, ú → a, c, e, i, o, u)</span>
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="ignoreCase" checked>
+                            <span>Ignorar maiúsculas/minúsculas (TEXTO = texto)</span>
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="ignorePunctuation" checked>
+                            <span>Ignorar pontuação (.,;:!?-)</span>
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="ignoreSpaces" checked>
+                            <span>Ignorar espaços extras e normalizar</span>
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="ignoreFinalPeriod" checked>
+                            <span>Ignorar ponto final no final da frase</span>
+                        </label>
+                    </div>
+                    
+                    <div class="similarity-info">
+                        <i class="fas fa-info-circle"></i> 
+                        <strong>Como funciona:</strong> As questões são consideradas duplicatas se as perguntas forem similares após aplicar as regras acima. Pequenas variações como "Brasília" vs "Brasilia" ou "capital?" vs "capital" são ignoradas.
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="findDuplicatesBtn">
+                        <i class="fas fa-search"></i> Encontrar Duplicatas
+                    </button>
+                    <button class="btn btn-warning" id="loadExampleBtn">
+                        <i class="fas fa-code"></i> Carregar Exemplo
+                    </button>
+                    <button class="btn btn-danger" id="clearBtn">
+                        <i class="fas fa-broom"></i> Limpar
+                    </button>
+                </div>
+                
+                <div class="stats" id="stats" style="display: none;">
+                    <p><i class="fas fa-list"></i> Total de questões: <span id="totalQuestions">0</span></p>
+                    <p><i class="fas fa-copy"></i> Grupos duplicados: <span id="duplicateGroups">0</span></p>
+                    <p><i class="fas fa-times-circle"></i> Questões duplicadas: <span id="duplicateCount">0</span></p>
+                </div>
+            </div>
+            
+            <!-- Coluna de Duplicatas -->
+            <div class="duplicates-section">
+                <h2 class="section-title"><i class="fas fa-copy"></i> Questões Duplicadas</h2>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-success" id="removeSelectedBtn" disabled>
+                        <i class="fas fa-trash-alt"></i> Remover Selecionadas
+                    </button>
+                    <button class="btn btn-danger" id="removeAllDuplicatesBtn" disabled>
+                        <i class="fas fa-trash"></i> Remover Todas Duplicatas
+                    </button>
+                </div>
+                
+                <div id="duplicatesContainer" class="duplicates-list">
+                    <div class="no-duplicates">
+                        <i class="fas fa-check-circle"></i>
+                        <p>Nenhuma duplicata encontrada ainda.<br>Cole suas questões e clique em "Encontrar Duplicatas".</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Removedor de Duplicatas masterBank &copy; 2023 | Detecta variações de acentuação, pontuação e formatação</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos DOM
+            const jsonInput = document.getElementById('jsonInput');
+            const findDuplicatesBtn = document.getElementById('findDuplicatesBtn');
+            const loadExampleBtn = document.getElementById('loadExampleBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const removeSelectedBtn = document.getElementById('removeSelectedBtn');
+            const removeAllDuplicatesBtn = document.getElementById('removeAllDuplicatesBtn');
+            const duplicatesContainer = document.getElementById('duplicatesContainer');
+            const stats = document.getElementById('stats');
+            const totalQuestionsSpan = document.getElementById('totalQuestions');
+            const duplicateGroupsSpan = document.getElementById('duplicateGroups');
+            const duplicateCountSpan = document.getElementById('duplicateCount');
+            const successAlert = document.getElementById('successAlert');
+            const errorAlert = document.getElementById('errorAlert');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Opções de comparação
+            const ignoreAccents = document.getElementById('ignoreAccents');
+            const ignoreCase = document.getElementById('ignoreCase');
+            const ignorePunctuation = document.getElementById('ignorePunctuation');
+            const ignoreSpaces = document.getElementById('ignoreSpaces');
+            const ignoreFinalPeriod = document.getElementById('ignoreFinalPeriod');
+            
+            // Armazenamento das questões atuais
+            let currentQuestions = [];
+            let duplicateGroups = [];
+            
+            // Função para normalizar texto baseado nas opções
+            function normalizeText(text) {
+                if (!text) return '';
+                
+                let normalized = text;
+                
+                if (ignoreAccents.checked) {
+                    normalized = normalized.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                }
+                
+                if (ignoreCase.checked) {
+                    normalized = normalized.toLowerCase();
+                }
+                
+                if (ignorePunctuation.checked) {
+                    normalized = normalized.replace(/[.,;:!?\-()\[\]{}]/g, '');
+                }
+                
+                if (ignoreSpaces.checked) {
+                    normalized = normalized.replace(/\s+/g, ' ').trim();
+                }
+                
+                if (ignoreFinalPeriod.checked) {
+                    normalized = normalized.replace(/\.$/, '');
+                }
+                
+                return normalized;
+            }
+            
+            // Função para extrair array de questões do texto
+            function parseQuestions(text) {
+                try {
+                    // Tenta avaliar o texto como JavaScript
+                    // Remove quebras de linha e espaços extras para facilitar o parsing
+                    const cleanText = text.replace(/\n/g, ' ').replace(/\s+/g, ' ');
+                    
+                    // Usa eval de forma segura? Melhor evitar eval se possível
+                    // Vamos usar Function constructor que é um pouco mais seguro que eval
+                    const parseFunction = new Function(`return ${cleanText}`);
+                    const result = parseFunction();
+                    
+                    if (Array.isArray(result)) {
+                        return result;
+                    } else {
+                        throw new Error('O conteúdo não é um array válido');
+                    }
+                } catch (e) {
+                    // Tenta um parsing mais flexível para o formato específico
+                    try {
+                        // Converte o formato {q: "...", a: [...], c: 0} para JSON válido
+                        let jsonStr = text
+                            .replace(/([{,]\s*)([a-zA-Z0-9_]+)\s*:/g, '$1"$2":') // Adiciona aspas nas chaves
+                            .replace(/'/g, '"') // Troca aspas simples por duplas
+                            .replace(/\n/g, ' ') // Remove quebras de linha
+                            .replace(/\s+/g, ' '); // Normaliza espaços
+                        
+                        return JSON.parse(jsonStr);
+                    } catch (e2) {
+                        throw new Error('Formato inválido. Use o formato masterBank: [{q: "...", a: ["...", "..."], c: 0}]');
+                    }
+                }
+            }
+            
+            // Função para encontrar duplicatas
+            function findDuplicates() {
+                try {
+                    const text = jsonInput.value.trim();
+                    if (!text) {
+                        showError('Cole as questões no campo de entrada.');
+                        return;
+                    }
+                    
+                    // Parse das questões
+                    currentQuestions = parseQuestions(text);
+                    
+                    if (currentQuestions.length === 0) {
+                        showError('Nenhuma questão encontrada.');
+                        return;
+                    }
+                    
+                    // Valida cada questão
+                    for (let i = 0; i < currentQuestions.length; i++) {
+                        const q = currentQuestions[i];
+                        if (!q.q || !Array.isArray(q.a) || q.a.length !== 4 || q.c === undefined) {
+                            showError(`Questão ${i+1} está com formato inválido. Cada questão deve ter q (string), a (array com 4 alternativas) e c (número 0-3).`);
+                            return;
+                        }
+                    }
+                    
+                    // Mapa para agrupar questões similares
+                    const questionMap = new Map();
+                    
+                    currentQuestions.forEach((question, index) => {
+                        const normalizedQ = normalizeText(question.q);
+                        
+                        if (!questionMap.has(normalizedQ)) {
+                            questionMap.set(normalizedQ, []);
+                        }
+                        
+                        questionMap.get(normalizedQ).push({
+                            ...question,
+                            originalIndex: index
+                        });
+                    });
+                    
+                    // Filtra apenas grupos com mais de uma questão
+                    duplicateGroups = Array.from(questionMap.entries())
+                        .filter(([_, questions]) => questions.length > 1)
+                        .map(([normalizedQ, questions]) => ({
+                            normalizedQ,
+                            questions: questions.sort((a, b) => a.originalIndex - b.originalIndex)
+                        }));
+                    
+                    // Atualiza estatísticas
+                    totalQuestionsSpan.textContent = currentQuestions.length;
+                    duplicateGroupsSpan.textContent = duplicateGroups.length;
+                    
+                    const duplicateCount = duplicateGroups.reduce((acc, group) => acc + group.questions.length, 0);
+                    duplicateCountSpan.textContent = duplicateCount;
+                    
+                    stats.style.display = 'block';
+                    
+                    // Renderiza duplicatas
+                    renderDuplicates();
+                    
+                    // Habilita botões
+                    updateButtonsState();
+                    
+                    if (duplicateGroups.length === 0) {
+                        showSuccess('Nenhuma duplicata encontrada! Todas as questões são únicas.');
+                    } else {
+                        showSuccess(`Encontradas ${duplicateGroups.length} grupo(s) com ${duplicateCount} questões duplicadas.`);
+                    }
+                    
+                } catch (error) {
+                    showError('Erro ao processar: ' + error.message);
+                }
+            }
+            
+            // Função para renderizar grupos de duplicatas
+            function renderDuplicates() {
+                if (duplicateGroups.length === 0) {
+                    duplicatesContainer.innerHTML = `
+                        <div class="no-duplicates">
+                            <i class="fas fa-check-circle"></i>
+                            <p>Nenhuma duplicata encontrada!<br>Todas as questões são únicas.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let html = '';
+                
+                duplicateGroups.forEach((group, groupIndex) => {
+                    html += `
+                        <div class="duplicate-group" data-group-index="${groupIndex}">
+                            <div class="group-header">
+                                <div>
+                                    <i class="fas fa-copy"></i> 
+                                    Grupo ${groupIndex + 1} - ${group.questions.length} questões similares
+                                </div>
+                                <div class="group-actions">
+                                    <button class="btn btn-success btn-sm select-all-group" data-group-index="${groupIndex}">
+                                        <i class="fas fa-check-double"></i> Selecionar todas
+                                    </button>
+                                    <button class="btn btn-danger btn-sm remove-group" data-group-index="${groupIndex}">
+                                        <i class="fas fa-trash"></i> Remover grupo
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="question-items">
+                    `;
+                    
+                    group.questions.forEach((question, questionIndex) => {
+                        const correctLetter = ['A', 'B', 'C', 'D'][question.c];
+                        
+                        html += `
+                            <div class="question-item">
+                                <input type="checkbox" class="duplicate-checkbox" 
+                                       data-group-index="${groupIndex}" 
+                                       data-question-index="${question.originalIndex}"
+                                       id="chk_${groupIndex}_${questionIndex}">
+                                <div class="question-content">
+                                    <div class="question-text">${escapeHtml(question.q)}</div>
+                                    <div class="alternatives-preview">
+                                        A: ${escapeHtml(question.a[0])} | 
+                                        B: ${escapeHtml(question.a[1])} | 
+                                        C: ${escapeHtml(question.a[2])} | 
+                                        D: ${escapeHtml(question.a[3])}
+                                    </div>
+                                    <div class="question-meta">
+                                        <span>Posição: #${question.originalIndex + 1}</span>
+                                        <span class="correct-badge">Correta: ${correctLetter}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    html += `
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                duplicatesContainer.innerHTML = html;
+                
+                // Adiciona eventos para os novos botões
+                document.querySelectorAll('.select-all-group').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const groupIndex = this.dataset.groupIndex;
+                        const checkboxes = document.querySelectorAll(`.duplicate-checkbox[data-group-index="${groupIndex}"]`);
+                        const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+                        
+                        checkboxes.forEach(cb => {
+                            cb.checked = !allChecked;
+                        });
+                        
+                        updateButtonsState();
+                    });
+                });
+                
+                document.querySelectorAll('.remove-group').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const groupIndex = parseInt(this.dataset.groupIndex);
+                        removeGroup(groupIndex);
+                    });
+                });
+                
+                document.querySelectorAll('.duplicate-checkbox').forEach(cb => {
+                    cb.addEventListener('change', updateButtonsState);
+                });
+            }
+            
+            // Função auxiliar para escapar HTML
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+            
+            // Função para remover um grupo inteiro
+            function removeGroup(groupIndex) {
+                const group = duplicateGroups[groupIndex];
+                const indicesToRemove = group.questions.map(q => q.originalIndex);
+                
+                // Filtra as questões atuais removendo as do grupo
+                currentQuestions = currentQuestions.filter((_, index) => !indicesToRemove.includes(index));
+                
+                // Atualiza o texto no textarea
+                updateTextareaFromCurrent();
+                
+                // Recalcula duplicatas
+                findDuplicates();
+                
+                showSuccess(`Grupo ${groupIndex + 1} removido com sucesso!`);
+            }
+            
+            // Função para remover questões selecionadas
+            function removeSelected() {
+                const selectedCheckboxes = document.querySelectorAll('.duplicate-checkbox:checked');
+                
+                if (selectedCheckboxes.length === 0) {
+                    showError('Selecione pelo menos uma questão para remover.');
+                    return;
+                }
+                
+                const indicesToRemove = new Set();
+                
+                selectedCheckboxes.forEach(cb => {
+                    const questionIndex = parseInt(cb.dataset.questionIndex);
+                    indicesToRemove.add(questionIndex);
+                });
+                
+                // Filtra as questões atuais removendo as selecionadas
+                currentQuestions = currentQuestions.filter((_, index) => !indicesToRemove.has(index));
+                
+                // Atualiza o texto no textarea
+                updateTextareaFromCurrent();
+                
+                // Recalcula duplicatas
+                findDuplicates();
+                
+                showSuccess(`${selectedCheckboxes.length} questão(ões) removida(s) com sucesso!`);
+            }
+            
+            // Função para remover todas as duplicatas (mantém apenas uma de cada grupo)
+            function removeAllDuplicates() {
+                if (duplicateGroups.length === 0) {
+                    showError('Não há duplicatas para remover.');
+                    return;
+                }
+                
+                // Conjunto de índices para manter (primeira de cada grupo)
+                const indicesToKeep = new Set();
+                const allQuestions = [...currentQuestions];
+                
+                // Mapa para rastrear quais perguntas já foram mantidas
+                const keptNormalized = new Set();
+                
+                allQuestions.forEach((question, index) => {
+                    const normalizedQ = normalizeText(question.q);
+                    
+                    if (!keptNormalized.has(normalizedQ)) {
+                        keptNormalized.add(normalizedQ);
+                        indicesToKeep.add(index);
+                    }
+                });
+                
+                // Filtra mantendo apenas os índices selecionados
+                currentQuestions = allQuestions.filter((_, index) => indicesToKeep.has(index));
+                
+                // Atualiza o texto no textarea
+                updateTextareaFromCurrent();
+                
+                // Recalcula duplicatas
+                findDuplicates();
+                
+                showSuccess('Todas as duplicatas foram removidas! Mantida apenas uma de cada pergunta.');
+            }
+            
+            // Função para atualizar o textarea com as questões atuais
+            function updateTextareaFromCurrent() {
+                let output = '[\n';
+                
+                currentQuestions.forEach((q, index) => {
+                    output += `  {q: "${escapeJson(q.q)}", a: ["${escapeJson(q.a[0])}", "${escapeJson(q.a[1])}", "${escapeJson(q.a[2])}", "${escapeJson(q.a[3])}"], c: ${q.c}}`;
+                    
+                    if (index < currentQuestions.length - 1) {
+                        output += ',\n';
+                    } else {
+                        output += '\n';
+                    }
+                });
+                
+                output += ']';
+                jsonInput.value = output;
+            }
+            
+            // Função auxiliar para escapar JSON
+            function escapeJson(str) {
+                return str.replace(/"/g, '\\"').replace(/\n/g, ' ');
+            }
+            
+            // Função para atualizar estado dos botões
+            function updateButtonsState() {
+                const hasDuplicates = duplicateGroups.length > 0;
+                const hasSelected = document.querySelectorAll('.duplicate-checkbox:checked').length > 0;
+                
+                removeSelectedBtn.disabled = !hasSelected;
+                removeAllDuplicatesBtn.disabled = !hasDuplicates;
+            }
+            
+            // Funções de alerta
+            function showSuccess(message) {
+                successMessage.textContent = message;
+                successAlert.style.display = 'block';
+                errorAlert.style.display = 'none';
+                
+                setTimeout(() => {
+                    successAlert.style.display = 'none';
+                }, 3000);
+            }
+            
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorAlert.style.display = 'block';
+                successAlert.style.display = 'none';
+            }
+            
+            // Carregar exemplo
+            function loadExample() {
+                jsonInput.value = `[
+  {q: "Qual é a capital do Brasil?", a: ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"], c: 2},
+  {q: "Qual é a capital do Brasil?", a: ["São Paulo", "Rio de Janeiro", "Brasilia", "Salvador"], c: 2},
+  {q: "Qual a capital do Brasil?", a: ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"], c: 2},
+  {q: "Quem descobriu o Brasil?", a: ["Cabral", "Colombo", "Vespucci", "Cabral"], c: 0},
+  {q: "Quem descobriu o Brasil?", a: ["Pedro Cabral", "Cristovão Colombo", "Américo Vespúcio", "Pedro Álvares Cabral"], c: 3},
+  {q: "Em que ano o Brasil foi descoberto?", a: ["1500", "1492", "1501", "1499"], c: 0},
+  {q: "Em que ano o Brasil foi descoberto?", a: ["1500", "1492", "1500", "1499"], c: 0},
+  {q: "Em que ano o Brasil foi descoberto?", a: ["1500", "1492", "1500", "1499"], c: 2}
+]`;
+                findDuplicates();
+            }
+            
+            // Limpar tudo
+            function clearAll() {
+                if (confirm('Tem certeza que deseja limpar tudo?')) {
+                    jsonInput.value = '';
+                    duplicatesContainer.innerHTML = `
+                        <div class="no-duplicates">
+                            <i class="fas fa-check-circle"></i>
+                            <p>Nenhuma duplicata encontrada ainda.<br>Cole suas questões e clique em "Encontrar Duplicatas".</p>
+                        </div>
+                    `;
+                    stats.style.display = 'none';
+                    currentQuestions = [];
+                    duplicateGroups = [];
+                    removeSelectedBtn.disabled = true;
+                    removeAllDuplicatesBtn.disabled = true;
+                    showSuccess('Tudo limpo com sucesso!');
+                }
+            }
+            
+            // Event listeners
+            findDuplicatesBtn.addEventListener('click', findDuplicates);
+            loadExampleBtn.addEventListener('click', loadExample);
+            clearBtn.addEventListener('click', clearAll);
+            removeSelectedBtn.addEventListener('click', removeSelected);
+            removeAllDuplicatesBtn.addEventListener('click', removeAllDuplicates);
+            
+            // Inicializa com exemplo
+            loadExample();
+        });
+    </script>
+</body>
+</html>
