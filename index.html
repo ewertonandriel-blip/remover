@@ -14,7 +14,6 @@
             -webkit-tap-highlight-color: transparent;
         }
         
-        /* Variáveis para facilitar manutenção */
         :root {
             --primary: #667eea;
             --primary-dark: #5a67d8;
@@ -41,7 +40,6 @@
             transition: background-color 0.3s;
         }
         
-        /* Tema Escuro */
         body.dark-theme {
             background-color: var(--dark-bg);
             color: #e2e8f0;
@@ -52,7 +50,6 @@
             margin: 0 auto;
         }
         
-        /* Header responsivo */
         header {
             text-align: center;
             margin-bottom: 15px;
@@ -95,7 +92,6 @@
             backdrop-filter: blur(5px);
         }
         
-        /* Info format responsivo */
         .format-info {
             background-color: #eef2ff;
             border-left: 4px solid var(--primary);
@@ -110,14 +106,12 @@
             color: #e2e8f0;
         }
         
-        /* Layout responsivo - uma coluna no mobile */
         .main-content {
             display: grid;
             grid-template-columns: 1fr;
             gap: 15px;
         }
         
-        /* Cards responsivos */
         .input-section, .duplicates-section {
             background-color: var(--light-card);
             border-radius: var(--border-radius);
@@ -147,7 +141,6 @@
             border-bottom-color: var(--dark-border);
         }
         
-        /* Área de texto responsiva */
         textarea {
             width: 100%;
             min-height: 200px;
@@ -168,7 +161,6 @@
             border-color: var(--dark-border);
         }
         
-        /* Botões responsivos */
         .btn {
             padding: 12px 16px;
             border: none;
@@ -202,7 +194,36 @@
             font-size: 1rem;
         }
         
-        /* Container de botões responsivo */
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .btn-warning {
+            background-color: var(--warning);
+            color: #744210;
+        }
+        
+        .btn-info {
+            background-color: var(--info);
+            color: white;
+        }
+        
+        .btn-purple {
+            background-color: #9f7aea;
+            color: white;
+        }
+        
         .action-buttons {
             display: flex;
             flex-direction: column;
@@ -217,7 +238,6 @@
             }
         }
         
-        /* Barra de histórico responsiva */
         .history-bar {
             display: flex;
             gap: 5px;
@@ -243,7 +263,6 @@
             min-width: 80px;
         }
         
-        /* Opções em grid responsivo */
         .options-panel {
             background-color: #f8f9fa;
             border-radius: var(--border-radius);
@@ -278,30 +297,8 @@
             width: 20px;
             height: 20px;
             cursor: pointer;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            border: 2px solid #ccc;
-            border-radius: 4px;
-            position: relative;
         }
         
-        .checkbox-label input:checked {
-            background-color: var(--primary);
-            border-color: var(--primary);
-        }
-        
-        .checkbox-label input:checked::after {
-            content: '✓';
-            position: absolute;
-            color: white;
-            font-size: 14px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        
-        /* Estatísticas em grid responsivo */
         .stats {
             background-color: #e2e8f0;
             border-radius: var(--border-radius);
@@ -319,22 +316,10 @@
             }
         }
         
-        @media (min-width: 768px) {
-            .stats {
-                grid-template-columns: repeat(5, 1fr);
-            }
-        }
-        
         body.dark-theme .stats {
             background-color: var(--dark-border);
         }
         
-        .stats p {
-            margin: 0;
-            font-size: 0.8rem;
-        }
-        
-        /* Lista de duplicatas responsiva */
         .duplicates-list {
             max-height: 500px;
             overflow-y: auto;
@@ -392,7 +377,6 @@
             font-size: 0.8rem;
         }
         
-        /* Item de questão responsivo */
         .question-item {
             padding: 12px;
             border-bottom: 1px solid #e0e0e0;
@@ -412,27 +396,6 @@
             width: 22px;
             height: 22px;
             margin-right: 5px;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            border: 2px solid #ccc;
-            border-radius: 4px;
-            position: relative;
-        }
-        
-        .question-item input[type="checkbox"]:checked {
-            background-color: var(--success);
-            border-color: var(--success);
-        }
-        
-        .question-item input[type="checkbox"]:checked::after {
-            content: '✓';
-            position: absolute;
-            color: white;
-            font-size: 16px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
         }
         
         .question-text {
@@ -468,38 +431,6 @@
             display: inline-block;
         }
         
-        .variation-badge {
-            background-color: #fef3c7;
-            color: #744210;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            display: inline-block;
-            margin-top: 5px;
-        }
-        
-        /* Editor inline responsivo */
-        .edit-input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 8px;
-            border: 2px solid var(--primary);
-            border-radius: var(--border-radius);
-            font-size: 0.95rem;
-            min-height: 80px;
-        }
-        
-        .edit-actions {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .edit-actions button {
-            flex: 1;
-            padding: 10px;
-        }
-        
-        /* Preview responsivo */
         .output-preview {
             margin-top: 15px;
             border-top: 2px solid #e0e0e0;
@@ -543,7 +474,6 @@
             font-size: 0.8rem;
         }
         
-        /* Modo batch responsivo */
         .batch-mode {
             margin-top: 12px;
             padding: 12px;
@@ -551,20 +481,6 @@
             border-radius: var(--border-radius);
         }
         
-        body.dark-theme .batch-mode {
-            background-color: #553c9a;
-        }
-        
-        .batch-mode input[type="file"] {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            background-color: white;
-            border-radius: var(--border-radius);
-            font-size: 0.9rem;
-        }
-        
-        /* Relatório de qualidade responsivo */
         .quality-report {
             margin-top: 12px;
             padding: 12px;
@@ -573,19 +489,6 @@
             border-left: 4px solid var(--danger);
         }
         
-        .quality-report ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .quality-report li {
-            padding: 6px 0;
-            border-bottom: 1px solid #e0e0e0;
-            font-size: 0.85rem;
-            word-break: break-word;
-        }
-        
-        /* Alertas responsivos */
         .alert {
             padding: 12px;
             border-radius: var(--border-radius);
@@ -611,7 +514,18 @@
             }
         }
         
-        /* Progress bar responsiva */
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
         .progress-bar {
             width: 100%;
             height: 20px;
@@ -619,6 +533,7 @@
             border-radius: 10px;
             overflow: hidden;
             margin: 10px 0;
+            display: none;
         }
         
         .progress-fill {
@@ -628,7 +543,6 @@
             transition: width 0.3s;
         }
         
-        /* File input responsivo */
         .file-input-wrapper {
             position: relative;
             width: 100%;
@@ -642,16 +556,6 @@
             width: 100%;
             height: 100%;
             cursor: pointer;
-        }
-        
-        /* Keyboard hint responsivo */
-        .keyboard-hint {
-            font-size: 0.7rem;
-            color: #888;
-            display: flex;
-            align-items: center;
-            gap: 3px;
-            flex-wrap: wrap;
         }
         
         .footer-actions {
@@ -679,12 +583,10 @@
             font-size: 0.75rem;
         }
         
-        /* Touch optimizations */
         button, .btn, .history-btn, .checkbox-label {
             touch-action: manipulation;
         }
         
-        /* Safe area insets para iPhones modernos */
         @supports (padding: max(0px)) {
             body {
                 padding-left: max(10px, env(safe-area-inset-left));
@@ -699,7 +601,6 @@
             }
         }
         
-        /* Landscape optimizations */
         @media (orientation: landscape) and (max-height: 600px) {
             header {
                 padding: 8px;
@@ -717,6 +618,19 @@
                 min-height: 120px;
             }
         }
+        
+        .no-duplicates {
+            text-align: center;
+            padding: 40px 20px;
+            color: #888;
+            font-size: 1.1rem;
+        }
+        
+        .no-duplicates i {
+            font-size: 3rem;
+            color: #cbd5e0;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
@@ -733,6 +647,7 @@
         
         <div class="format-info">
             <p><strong>Formato:</strong> <code>{q: "Pergunta?", a: ["A","B","C","D"], c: 0}</code></p>
+            <p><strong>⚠️ Importante:</strong> Apenas remove duplicatas. O texto original é preservado, incluindo barras invertidas existentes.</p>
         </div>
         
         <div class="alert alert-success" id="successAlert" style="display: none;">
@@ -743,7 +658,6 @@
             <i class="fas fa-exclamation-triangle"></i> <span id="errorMessage"></span>
         </div>
         
-        <!-- Barra de Histórico -->
         <div class="history-bar">
             <button class="history-btn" id="undoBtn" disabled>
                 <i class="fas fa-undo"></i> Desfazer
@@ -754,7 +668,6 @@
         </div>
         
         <div class="main-content">
-            <!-- Coluna de Entrada -->
             <div class="input-section">
                 <h2 class="section-title">
                     <span><i class="fas fa-paste"></i> Entrada</span>
@@ -785,14 +698,12 @@
                     </button>
                 </div>
                 
-                <!-- Modo Batch -->
                 <div class="batch-mode" id="batchMode" style="display: none;">
                     <h4><i class="fas fa-layer-group"></i> Processar Múltiplos Arquivos</h4>
                     <input type="file" id="batchFileInput" multiple accept=".json, .txt, .js" />
                     <button class="btn btn-success" id="processBatchBtn">Processar</button>
                 </div>
                 
-                <!-- Opções (colapsáveis no mobile) -->
                 <details class="options-panel" open>
                     <summary style="font-weight: bold; padding: 10px; cursor: pointer;">
                         <i class="fas fa-sliders-h"></i> Opções de Comparação
@@ -852,12 +763,10 @@
                     </div>
                 </details>
                 
-                <!-- Barra de Progresso -->
                 <div class="progress-bar" id="progressBar" style="display: none;">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
                 
-                <!-- Estatísticas -->
                 <div class="stats" id="stats" style="display: none;">
                     <p><i class="fas fa-list"></i> Total: <span id="totalQuestions">0</span></p>
                     <p><i class="fas fa-copy"></i> Grupos: <span id="duplicateGroups">0</span></p>
@@ -866,20 +775,15 @@
                     <p><i class="fas fa-percent"></i> %: <span id="duplicatePercent">0%</span></p>
                 </div>
                 
-                <!-- Relatório de Qualidade -->
                 <div class="quality-report" id="qualityReport" style="display: none;">
                     <h4><i class="fas fa-exclamation-triangle"></i> Problemas Encontrados</h4>
                     <ul id="qualityList"></ul>
                 </div>
             </div>
             
-            <!-- Coluna de Duplicatas -->
             <div class="duplicates-section">
                 <h2 class="section-title">
                     <span><i class="fas fa-copy"></i> Duplicatas</span>
-                    <span class="keyboard-hint">
-                        <i class="fas fa-hand-pointer"></i> Toque para editar
-                    </span>
                 </h2>
                 
                 <div class="action-buttons">
@@ -903,7 +807,6 @@
                     </div>
                 </div>
                 
-                <!-- Preview -->
                 <div class="output-preview">
                     <div class="preview-header">
                         <h3><i class="fas fa-eye"></i> Resultado:</h3>
@@ -918,20 +821,11 @@
                     </div>
                     <textarea id="outputPreview" readonly placeholder="Resultado aparecerá aqui..."></textarea>
                 </div>
-                
-                <div class="footer-actions">
-                    <span class="keyboard-hint">
-                        <i class="fas fa-save"></i> Cache ativo
-                    </span>
-                    <span class="keyboard-hint">
-                        <i class="fas fa-edit"></i> Duplo toque para editar
-                    </span>
-                </div>
             </div>
         </div>
         
         <footer>
-            <p>Removedor de Duplicatas masterBank © 2023 | Versão Mobile</p>
+            <p>Removedor de Duplicatas masterBank © 2023 | Preserva o texto original - Não altera barras invertidas existentes</p>
         </footer>
     </div>
 
@@ -987,7 +881,6 @@
             let duplicateGroups = [];
             let history = [];
             let historyIndex = -1;
-            let editingId = null;
             
             // Cache local
             loadFromCache();
@@ -999,7 +892,7 @@
                 themeToggle.innerHTML = '<i class="fas fa-sun"></i> Tema';
             }
             
-            // Função para normalizar texto
+            // Função para normalizar texto (APENAS PARA COMPARAÇÃO)
             function normalizeText(text) {
                 if (!text) return '';
                 
@@ -1061,55 +954,55 @@
                 return similarity > 0.9;
             }
             
-            // Parse de questões
+            // Parse de questões - MANTÉM O TEXTO ORIGINAL
             function parseQuestions(text) {
                 try {
-                    let cleanText = text.trim();
-                    
-                    if (!cleanText.startsWith('[')) {
-                        cleanText = '[' + cleanText + ']';
+                    // Tenta parsear como JSON primeiro
+                    if (text.trim().startsWith('[') && text.trim().endsWith(']')) {
+                        try {
+                            return JSON.parse(text);
+                        } catch (e) {
+                            // Se falhar, continua
+                        }
                     }
                     
-                    let jsonStr = cleanText
-                        .replace(/([{,]\s*)([a-zA-Z0-9_]+)\s*:/g, '$1"$2":')
-                        .replace(/'/g, '"')
-                        .replace(/\n/g, ' ')
-                        .replace(/\s+/g, ' ')
-                        .replace(/,(\s*[}\]])/g, '$1');
-                    
-                    return JSON.parse(jsonStr);
-                } catch (e) {
-                    // Parsing manual para mobile
+                    // Parse manual preservando o texto exato
                     const questions = [];
-                    const matches = text.match(/{[^}]+}/g);
+                    const regex = /{q:\s*"((?:\\"|[^"])*)",\s*a:\s*\["((?:\\"|[^"])*)",\s*"((?:\\"|[^"])*)",\s*"((?:\\"|[^"])*)",\s*"((?:\\"|[^"])*)"\],\s*c:\s*(\d+)}/g;
+                    let match;
                     
-                    if (matches) {
-                        matches.forEach(match => {
-                            try {
-                                const q = match.match(/q:\s*"([^"]*)"/);
-                                const aMatch = match.match(/a:\s*\[(.*?)\]/);
-                                const c = match.match(/c:\s*(\d+)/);
-                                
-                                if (q && aMatch && c) {
-                                    const altStr = aMatch[1];
-                                    const altMatches = altStr.match(/"([^"]*)"/g);
-                                    const alternatives = altMatches ? altMatches.map(m => m.replace(/"/g, '')) : [];
-                                    
-                                    if (alternatives.length === 4) {
-                                        questions.push({
-                                            q: q[1],
-                                            a: alternatives,
-                                            c: parseInt(c[1])
-                                        });
-                                    }
-                                }
-                            } catch (e) {}
+                    while ((match = regex.exec(text)) !== null) {
+                        questions.push({
+                            q: match[1].replace(/\\"/g, '"'), // Restaura aspas escapadas
+                            a: [
+                                match[2].replace(/\\"/g, '"'),
+                                match[3].replace(/\\"/g, '"'),
+                                match[4].replace(/\\"/g, '"'),
+                                match[5].replace(/\\"/g, '"')
+                            ],
+                            c: parseInt(match[6])
                         });
                     }
                     
-                    if (questions.length > 0) return questions;
+                    if (questions.length > 0) {
+                        return questions;
+                    }
+                    
                     throw new Error('Formato inválido');
+                    
+                } catch (error) {
+                    console.error('Erro no parse:', error);
+                    throw new Error('Não foi possível interpretar o formato');
                 }
+            }
+            
+            // Função para gerar string SEM ALTERAR o texto original
+            function generateQuestionString(question) {
+                // Preserva exatamente o texto, incluindo barras invertidas originais
+                // Mas escapa aspas corretamente
+                const escapeQuotes = (str) => str.replace(/"/g, '\\"');
+                
+                return `{q: "${escapeQuotes(question.q)}", a: ["${escapeQuotes(question.a[0])}", "${escapeQuotes(question.a[1])}", "${escapeQuotes(question.a[2])}", "${escapeQuotes(question.a[3])}"], c: ${question.c}}`;
             }
             
             // Validação
@@ -1210,7 +1103,6 @@
                 redoBtn.disabled = historyIndex >= history.length - 1;
             }
             
-            // Progresso
             function showProgress(percent) {
                 progressBar.style.display = 'block';
                 progressFill.style.width = percent + '%';
@@ -1328,7 +1220,7 @@
                 }
             }
             
-            // Renderizar duplicatas (versão mobile)
+            // Renderizar duplicatas
             function renderDuplicates() {
                 if (duplicateGroups.length === 0) {
                     duplicatesContainer.innerHTML = `
@@ -1364,35 +1256,24 @@
                     
                     group.questions.forEach((question, questionIndex) => {
                         const correctLetter = ['A', 'B', 'C', 'D'][question.c];
-                        const isEditing = editingId === `q_${groupIndex}_${questionIndex}`;
                         
                         html += `
-                            <div class="question-item" 
-                                 ondblclick="startEditing('${groupIndex}_${questionIndex}')"
-                                 ontouchstart="touchStart('${groupIndex}_${questionIndex}')"
-                                 data-id="${groupIndex}_${questionIndex}">
+                            <div class="question-item">
                                 <input type="checkbox" class="duplicate-checkbox" 
                                        data-group-index="${groupIndex}" 
                                        data-question-index="${question.originalIndex}">
                                 <div class="question-content">
-                                    ${isEditing ? 
-                                        `<textarea class="edit-input" id="edit_${groupIndex}_${questionIndex}" rows="2">${escapeHtml(question.q)}</textarea>
-                                         <div class="edit-actions">
-                                             <button class="btn btn-success" onclick="saveEdit('${groupIndex}_${questionIndex}', ${question.originalIndex})">Salvar</button>
-                                             <button class="btn btn-danger" onclick="cancelEdit()">Cancelar</button>
-                                         </div>` :
-                                        `<div class="question-text">${escapeHtml(question.q)}</div>
-                                         <div class="alternatives-preview">
-                                            A: ${escapeHtml(question.a[0])}<br>
-                                            B: ${escapeHtml(question.a[1])}<br>
-                                            C: ${escapeHtml(question.a[2])}<br>
-                                            D: ${escapeHtml(question.a[3])}
-                                         </div>
-                                         <div class="question-meta">
-                                            <span>#${question.originalIndex + 1}</span>
-                                            <span class="correct-badge">${correctLetter}</span>
-                                         </div>`
-                                    }
+                                    <div class="question-text">${escapeHtml(question.q)}</div>
+                                    <div class="alternatives-preview">
+                                        A: ${escapeHtml(question.a[0])}<br>
+                                        B: ${escapeHtml(question.a[1])}<br>
+                                        C: ${escapeHtml(question.a[2])}<br>
+                                        D: ${escapeHtml(question.a[3])}
+                                    </div>
+                                    <div class="question-meta">
+                                        <span>#${question.originalIndex + 1}</span>
+                                        <span class="correct-badge">${correctLetter}</span>
+                                    </div>
                                 </div>
                             </div>
                         `;
@@ -1406,7 +1287,6 @@
                 
                 duplicatesContainer.innerHTML = html;
                 
-                // Event listeners
                 document.querySelectorAll('.select-all-group').forEach(btn => {
                     btn.addEventListener('click', function(e) {
                         e.stopPropagation();
@@ -1430,57 +1310,25 @@
                 });
             }
             
-            // Touch events para mobile
-            let touchTimeout;
-            function touchStart(id) {
-                touchTimeout = setTimeout(() => startEditing(id), 500);
-            }
-            
-            document.addEventListener('touchend', () => clearTimeout(touchTimeout));
-            
-            // Editor inline
-            window.startEditing = function(id) {
-                if (editingId) cancelEdit();
-                editingId = id;
-                renderDuplicates();
-                
-                setTimeout(() => {
-                    const textarea = document.getElementById(`edit_${id}`);
-                    if (textarea) textarea.focus();
-                }, 100);
-            };
-            
-            window.saveEdit = function(id, originalIndex) {
-                const textarea = document.getElementById(`edit_${id}`);
-                if (textarea) {
-                    currentQuestions[originalIndex].q = textarea.value;
-                    updateTextareaFromCurrent();
-                    editingId = null;
-                    findDuplicates();
-                    showSuccess('Editado');
-                }
-            };
-            
-            window.cancelEdit = function() {
-                editingId = null;
-                renderDuplicates();
-            };
-            
             function escapeHtml(text) {
                 const div = document.createElement('div');
                 div.textContent = text;
                 return div.innerHTML;
             }
             
+            // Função para atualizar preview - PRESERVA O TEXTO ORIGINAL
             function updatePreview() {
                 if (currentQuestions.length > 0) {
                     let output = '[\n';
                     
                     currentQuestions.forEach((q, index) => {
-                        output += `  {q: "${escapeJson(q.q)}", a: ["${escapeJson(q.a[0])}", "${escapeJson(q.a[1])}", "${escapeJson(q.a[2])}", "${escapeJson(q.a[3])}"], c: ${q.c}}`;
+                        output += '  ' + generateQuestionString(q);
                         
-                        if (index < currentQuestions.length - 1) output += ',\n';
-                        else output += '\n';
+                        if (index < currentQuestions.length - 1) {
+                            output += ',\n';
+                        } else {
+                            output += '\n';
+                        }
                     });
                     
                     output += ']';
@@ -1492,10 +1340,6 @@
                     copyOutputBtn.disabled = true;
                     exportBtn.disabled = true;
                 }
-            }
-            
-            function escapeJson(str) {
-                return str.replace(/"/g, '\\"').replace(/\n/g, ' ');
             }
             
             function removeGroup(groupIndex) {
@@ -1548,14 +1392,18 @@
                 updateButtonsState();
             }
             
+            // Função para atualizar textarea - PRESERVA O TEXTO ORIGINAL
             function updateTextareaFromCurrent() {
                 let output = '[\n';
                 
                 currentQuestions.forEach((q, index) => {
-                    output += `  {q: "${escapeJson(q.q)}", a: ["${escapeJson(q.a[0])}", "${escapeJson(q.a[1])}", "${escapeJson(q.a[2])}", "${escapeJson(q.a[3])}"], c: ${q.c}}`;
+                    output += '  ' + generateQuestionString(q);
                     
-                    if (index < currentQuestions.length - 1) output += ',\n';
-                    else output += '\n';
+                    if (index < currentQuestions.length - 1) {
+                        output += ',\n';
+                    } else {
+                        output += '\n';
+                    }
                 });
                 
                 output += ']';
@@ -1570,6 +1418,11 @@
                 removeSelectedBtn.disabled = !hasSelected;
                 removeAllDuplicatesBtn.disabled = !hasDuplicates;
                 selectAllDuplicatesBtn.disabled = !hasDuplicates;
+            }
+            
+            function updateFromCurrent() {
+                updateTextareaFromCurrent();
+                findDuplicates();
             }
             
             function copyPreview() {
@@ -1684,11 +1537,6 @@
                 }
             }
             
-            function updateFromCurrent() {
-                updateTextareaFromCurrent();
-                findDuplicates();
-            }
-            
             function showSuccess(msg) {
                 successMessage.textContent = msg;
                 successAlert.style.display = 'block';
@@ -1716,11 +1564,6 @@
             themeToggle.addEventListener('click', toggleTheme);
             batchModeBtn.addEventListener('click', toggleBatchMode);
             processBatchBtn.addEventListener('click', processBatch);
-            
-            // Prevenir zoom em double-tap
-            document.addEventListener('touchstart', (e) => {
-                if (e.touches.length > 1) e.preventDefault();
-            }, { passive: false });
         });
     </script>
 </body>
