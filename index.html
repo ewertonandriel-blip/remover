@@ -2,8 +2,8 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Removedor de Duplicatas - masterBank</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Removedor de Duplicatas masterBank - Mobile</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -11,108 +11,248 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* Variáveis para facilitar manutenção */
+        :root {
+            --primary: #667eea;
+            --primary-dark: #5a67d8;
+            --secondary: #764ba2;
+            --danger: #e53e3e;
+            --success: #48bb78;
+            --warning: #ecc94b;
+            --info: #4299e1;
+            --dark-bg: #1a202c;
+            --dark-card: #2d3748;
+            --dark-border: #4a5568;
+            --light-bg: #f5f7fa;
+            --light-card: #ffffff;
+            --border-radius: 8px;
+            --spacing: 15px;
         }
         
         body {
-            background-color: #f5f7fa;
+            background-color: var(--light-bg);
             color: #333;
-            line-height: 1.6;
-            padding: 15px;
+            line-height: 1.5;
+            padding: 10px;
             min-height: 100vh;
+            transition: background-color 0.3s;
+        }
+        
+        /* Tema Escuro */
+        body.dark-theme {
+            background-color: var(--dark-bg);
+            color: #e2e8f0;
         }
         
         .container {
-            max-width: 1400px;
+            max-width: 100%;
             margin: 0 auto;
         }
         
+        /* Header responsivo */
         header {
             text-align: center;
-            margin-bottom: 25px;
-            padding: 20px 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin-bottom: 15px;
+            padding: 15px 10px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
         
         h1 {
-            font-size: 1.8rem;
-            margin-bottom: 8px;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            padding-right: 50px;
         }
         
         .subtitle {
-            font-size: 1rem;
+            font-size: 0.8rem;
             opacity: 0.9;
-            max-width: 800px;
-            margin: 0 auto;
         }
         
+        .theme-toggle {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+        
+        .theme-toggle button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            backdrop-filter: blur(5px);
+        }
+        
+        /* Info format responsivo */
         .format-info {
             background-color: #eef2ff;
-            border-left: 4px solid #667eea;
-            padding: 12px 15px;
-            margin: 15px 0;
-            border-radius: 0 8px 8px 0;
-            font-size: 0.9rem;
+            border-left: 4px solid var(--primary);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            font-size: 0.8rem;
         }
         
+        body.dark-theme .format-info {
+            background-color: var(--dark-card);
+            color: #e2e8f0;
+        }
+        
+        /* Layout responsivo - uma coluna no mobile */
         .main-content {
             display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 20px;
+            grid-template-columns: 1fr;
+            gap: 15px;
         }
         
-        @media (max-width: 1000px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-        }
-        
+        /* Cards responsivos */
         .input-section, .duplicates-section {
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            background-color: var(--light-card);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        body.dark-theme .input-section,
+        body.dark-theme .duplicates-section {
+            background-color: var(--dark-card);
+            border-color: var(--dark-border);
         }
         
         .section-title {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: #333;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
             border-bottom: 2px solid #eef2ff;
             padding-bottom: 8px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         
-        .section-title i {
-            margin-right: 8px;
-            color: #667eea;
+        body.dark-theme .section-title {
+            border-bottom-color: var(--dark-border);
         }
         
-        .input-area {
-            margin-bottom: 20px;
-        }
-        
+        /* Área de texto responsiva */
         textarea {
             width: 100%;
-            height: 300px;
+            min-height: 200px;
+            max-height: 400px;
             padding: 12px;
             font-family: 'Courier New', monospace;
             font-size: 0.9rem;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: var(--border-radius);
             background-color: #f8f9fa;
             resize: vertical;
-            line-height: 1.4;
+            -webkit-appearance: none;
         }
         
+        body.dark-theme textarea {
+            background-color: var(--dark-bg);
+            color: #e2e8f0;
+            border-color: var(--dark-border);
+        }
+        
+        /* Botões responsivos */
+        .btn {
+            padding: 12px 16px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            margin-bottom: 5px;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+        }
+        
+        @media (min-width: 768px) {
+            .btn {
+                width: auto;
+                margin-bottom: 0;
+            }
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+        }
+        
+        .btn i {
+            font-size: 1rem;
+        }
+        
+        /* Container de botões responsivo */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 15px 0;
+        }
+        
+        @media (min-width: 768px) {
+            .action-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+        }
+        
+        /* Barra de histórico responsiva */
+        .history-bar {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+            padding: 8px;
+            background-color: #f0f0f0;
+            border-radius: var(--border-radius);
+            flex-wrap: wrap;
+        }
+        
+        body.dark-theme .history-bar {
+            background-color: var(--dark-border);
+        }
+        
+        .history-btn {
+            padding: 8px 12px;
+            font-size: 0.8rem;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            flex: 1;
+            min-width: 80px;
+        }
+        
+        /* Opções em grid responsivo */
         .options-panel {
             background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 15px;
+            border-radius: var(--border-radius);
+            padding: 12px;
             margin: 15px 0;
+        }
+        
+        body.dark-theme .options-panel {
+            background-color: var(--dark-bg);
         }
         
         .option-group {
@@ -120,9 +260,8 @@
         }
         
         .option-group h4 {
-            margin-bottom: 10px;
-            color: #555;
-            font-size: 1rem;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
         }
         
         .checkbox-label {
@@ -130,171 +269,195 @@
             align-items: center;
             margin-bottom: 8px;
             cursor: pointer;
+            font-size: 0.9rem;
+            padding: 5px 0;
         }
         
         .checkbox-label input {
-            margin-right: 8px;
-            width: 18px;
-            height: 18px;
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
             cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            position: relative;
         }
         
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+        .checkbox-label input:checked {
+            background-color: var(--primary);
+            border-color: var(--primary);
         }
         
-        .btn i {
-            margin-right: 8px;
-        }
-        
-        .btn-primary {
-            background-color: #667eea;
+        .checkbox-label input:checked::after {
+            content: '✓';
+            position: absolute;
             color: white;
+            font-size: 14px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
         
-        .btn-primary:hover {
-            background-color: #5a67d8;
-        }
-        
-        .btn-danger {
-            background-color: #e53e3e;
-            color: white;
-        }
-        
-        .btn-danger:hover {
-            background-color: #c53030;
-        }
-        
-        .btn-success {
-            background-color: #48bb78;
-            color: white;
-        }
-        
-        .btn-success:hover {
-            background-color: #38a169;
-        }
-        
-        .btn-warning {
-            background-color: #ecc94b;
-            color: #744210;
-        }
-        
-        .btn-warning:hover {
-            background-color: #d69e2e;
-        }
-        
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 15px;
-        }
-        
+        /* Estatísticas em grid responsivo */
         .stats {
             background-color: #e2e8f0;
-            border-radius: 5px;
-            padding: 10px;
+            border-radius: var(--border-radius);
+            padding: 12px;
             margin-top: 15px;
             font-size: 0.9rem;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
         }
         
-        .stats span {
-            font-weight: bold;
-            color: #2d3748;
+        @media (min-width: 480px) {
+            .stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
         
+        @media (min-width: 768px) {
+            .stats {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+        
+        body.dark-theme .stats {
+            background-color: var(--dark-border);
+        }
+        
+        .stats p {
+            margin: 0;
+            font-size: 0.8rem;
+        }
+        
+        /* Lista de duplicatas responsiva */
         .duplicates-list {
-            max-height: 600px;
+            max-height: 500px;
             overflow-y: auto;
+            margin-bottom: 15px;
+            -webkit-overflow-scrolling: touch;
         }
         
         .duplicate-group {
             border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            background-color: #fff;
+            border-radius: var(--border-radius);
+            margin-bottom: 12px;
+        }
+        
+        body.dark-theme .duplicate-group {
+            border-color: var(--dark-border);
         }
         
         .group-header {
             background-color: #fed7d7;
-            padding: 12px 15px;
-            border-radius: 8px 8px 0 0;
+            padding: 12px;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: bold;
-            color: #c53030;
-            border-bottom: 1px solid #feb2b2;
+            flex-direction: column;
+            gap: 8px;
         }
         
-        .group-header i {
-            margin-right: 5px;
+        @media (min-width: 480px) {
+            .group-header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+        
+        body.dark-theme .group-header {
+            background-color: #742a2a;
+            color: #fed7d7;
         }
         
         .group-actions {
             display: flex;
             gap: 8px;
+            width: 100%;
+        }
+        
+        @media (min-width: 480px) {
+            .group-actions {
+                width: auto;
+            }
         }
         
         .group-actions button {
-            padding: 5px 12px;
-            font-size: 0.85rem;
+            flex: 1;
+            padding: 8px;
+            font-size: 0.8rem;
         }
         
-        .question-items {
-            padding: 10px;
-        }
-        
+        /* Item de questão responsivo */
         .question-item {
             padding: 12px;
             border-bottom: 1px solid #e0e0e0;
             display: flex;
-            align-items: flex-start;
-            gap: 12px;
+            flex-direction: column;
+            gap: 10px;
         }
         
-        .question-item:last-child {
-            border-bottom: none;
+        @media (min-width: 480px) {
+            .question-item {
+                flex-direction: row;
+                align-items: flex-start;
+            }
         }
         
         .question-item input[type="checkbox"] {
-            margin-top: 3px;
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
+            width: 22px;
+            height: 22px;
+            margin-right: 5px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            position: relative;
         }
         
-        .question-content {
-            flex: 1;
+        .question-item input[type="checkbox"]:checked {
+            background-color: var(--success);
+            border-color: var(--success);
+        }
+        
+        .question-item input[type="checkbox"]:checked::after {
+            content: '✓';
+            position: absolute;
+            color: white;
+            font-size: 16px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
         
         .question-text {
             font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 5px;
             font-size: 0.95rem;
+            margin-bottom: 5px;
+            word-break: break-word;
         }
         
         .alternatives-preview {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #666;
             margin-bottom: 5px;
+            word-break: break-word;
+        }
+        
+        body.dark-theme .alternatives-preview {
+            color: #a0aec0;
         }
         
         .question-meta {
             display: flex;
-            gap: 15px;
-            font-size: 0.8rem;
-            color: #888;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 0.75rem;
         }
         
         .correct-badge {
@@ -303,176 +466,472 @@
             padding: 2px 8px;
             border-radius: 12px;
             display: inline-block;
-            font-size: 0.75rem;
         }
         
-        .no-duplicates {
-            text-align: center;
-            padding: 40px 20px;
-            color: #888;
-            font-size: 1.1rem;
+        .variation-badge {
+            background-color: #fef3c7;
+            color: #744210;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin-top: 5px;
         }
         
-        .no-duplicates i {
-            font-size: 3rem;
-            color: #cbd5e0;
-            margin-bottom: 15px;
-        }
-        
-        .alert {
-            padding: 12px 15px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            display: none;
-        }
-        
-        .alert-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .alert-error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        
-        .similarity-info {
-            background-color: #ebf4ff;
-            border-radius: 5px;
+        /* Editor inline responsivo */
+        .edit-input {
+            width: 100%;
             padding: 10px;
-            margin: 10px 0;
-            font-size: 0.9rem;
-            border-left: 3px solid #4299e1;
+            margin-bottom: 8px;
+            border: 2px solid var(--primary);
+            border-radius: var(--border-radius);
+            font-size: 0.95rem;
+            min-height: 80px;
         }
         
-        .similarity-info i {
-            color: #4299e1;
+        .edit-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .edit-actions button {
+            flex: 1;
+            padding: 10px;
+        }
+        
+        /* Preview responsivo */
+        .output-preview {
+            margin-top: 15px;
+            border-top: 2px solid #e0e0e0;
+            padding-top: 12px;
+        }
+        
+        .preview-header {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        
+        @media (min-width: 480px) {
+            .preview-header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+        
+        .preview-actions {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+        }
+        
+        @media (min-width: 480px) {
+            .preview-actions {
+                width: auto;
+            }
+        }
+        
+        .preview-actions button {
+            flex: 1;
+            padding: 10px;
+        }
+        
+        .output-preview textarea {
+            height: 250px;
+            font-size: 0.8rem;
+        }
+        
+        /* Modo batch responsivo */
+        .batch-mode {
+            margin-top: 12px;
+            padding: 12px;
+            background-color: #e9d8fd;
+            border-radius: var(--border-radius);
+        }
+        
+        body.dark-theme .batch-mode {
+            background-color: #553c9a;
+        }
+        
+        .batch-mode input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            background-color: white;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+        }
+        
+        /* Relatório de qualidade responsivo */
+        .quality-report {
+            margin-top: 12px;
+            padding: 12px;
+            background-color: #f0f4f8;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--danger);
+        }
+        
+        .quality-report ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .quality-report li {
+            padding: 6px 0;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 0.85rem;
+            word-break: break-word;
+        }
+        
+        /* Alertas responsivos */
+        .alert {
+            padding: 12px;
+            border-radius: var(--border-radius);
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            animation: slideDown 0.3s;
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        /* Progress bar responsiva */
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        /* File input responsivo */
+        .file-input-wrapper {
+            position: relative;
+            width: 100%;
+        }
+        
+        .file-input-wrapper input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        /* Keyboard hint responsivo */
+        .keyboard-hint {
+            font-size: 0.7rem;
+            color: #888;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+        }
+        
+        @media (min-width: 480px) {
+            .footer-actions {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
         }
         
         footer {
             text-align: center;
-            margin-top: 30px;
-            padding-top: 15px;
+            margin-top: 20px;
+            padding-top: 10px;
             border-top: 1px solid #ddd;
-            color: #666;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
+        }
+        
+        /* Touch optimizations */
+        button, .btn, .history-btn, .checkbox-label {
+            touch-action: manipulation;
+        }
+        
+        /* Safe area insets para iPhones modernos */
+        @supports (padding: max(0px)) {
+            body {
+                padding-left: max(10px, env(safe-area-inset-left));
+                padding-right: max(10px, env(safe-area-inset-right));
+                padding-bottom: max(10px, env(safe-area-inset-bottom));
+            }
+            
+            .alert {
+                left: max(10px, env(safe-area-inset-left));
+                right: max(10px, env(safe-area-inset-right));
+                top: max(10px, env(safe-area-inset-top));
+            }
+        }
+        
+        /* Landscape optimizations */
+        @media (orientation: landscape) and (max-height: 600px) {
+            header {
+                padding: 8px;
+            }
+            
+            h1 {
+                font-size: 1.1rem;
+            }
+            
+            .duplicates-list {
+                max-height: 300px;
+            }
+            
+            textarea {
+                min-height: 120px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-clone"></i> Removedor de Duplicatas masterBank</h1>
-            <p class="subtitle">Identifique e remova questões duplicadas considerando variações de acentos, pontuação e formatação</p>
+            <h1><i class="fas fa-clone"></i> Removedor de Duplicatas</h1>
+            <p class="subtitle">Detecção inteligente de questões duplicadas</p>
+            <div class="theme-toggle">
+                <button id="themeToggle">
+                    <i class="fas fa-moon"></i> Tema
+                </button>
+            </div>
         </header>
         
         <div class="format-info">
-            <p><strong>Formato masterBank:</strong> <code>{q: "Pergunta?", a: ["Opção A", "Opção B", "Opção C", "Opção D"], c: 0}</code></p>
-            <p><strong>Detecção inteligente:</strong> Ignora diferenças de acentos, maiúsculas/minúsculas, pontuação, espaços extras e palavras irrelevantes</p>
+            <p><strong>Formato:</strong> <code>{q: "Pergunta?", a: ["A","B","C","D"], c: 0}</code></p>
         </div>
         
-        <div class="alert alert-success" id="successAlert">
+        <div class="alert alert-success" id="successAlert" style="display: none;">
             <i class="fas fa-check-circle"></i> <span id="successMessage"></span>
         </div>
         
-        <div class="alert alert-error" id="errorAlert">
+        <div class="alert alert-error" id="errorAlert" style="display: none;">
             <i class="fas fa-exclamation-triangle"></i> <span id="errorMessage"></span>
+        </div>
+        
+        <!-- Barra de Histórico -->
+        <div class="history-bar">
+            <button class="history-btn" id="undoBtn" disabled>
+                <i class="fas fa-undo"></i> Desfazer
+            </button>
+            <button class="history-btn" id="redoBtn" disabled>
+                <i class="fas fa-redo"></i> Refazer
+            </button>
         </div>
         
         <div class="main-content">
             <!-- Coluna de Entrada -->
             <div class="input-section">
-                <h2 class="section-title"><i class="fas fa-paste"></i> Entrada de Dados</h2>
+                <h2 class="section-title">
+                    <span><i class="fas fa-paste"></i> Entrada</span>
+                </h2>
                 
                 <div class="input-area">
-                    <label for="jsonInput">Cole suas questões no formato masterBank (array JSON):</label>
-                    <textarea id="jsonInput" placeholder='[
-  {q: "Qual é a capital do Brasil?", a: ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"], c: 2},
-  {q: "Qual é a capital do Brasil?", a: ["São Paulo", "Rio de Janeiro", "Brasilia", "Salvador"], c: 2}
-]'></textarea>
-                </div>
-                
-                <div class="options-panel">
-                    <h4><i class="fas fa-sliders-h"></i> Opções de Comparação</h4>
-                    
-                    <div class="option-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="ignoreAccents" checked>
-                            <span>Ignorar acentos (ã, ç, é, í, ó, ú → a, c, e, i, o, u)</span>
-                        </label>
-                        
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="ignoreCase" checked>
-                            <span>Ignorar maiúsculas/minúsculas (TEXTO = texto)</span>
-                        </label>
-                        
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="ignorePunctuation" checked>
-                            <span>Ignorar pontuação (.,;:!?-)</span>
-                        </label>
-                        
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="ignoreSpaces" checked>
-                            <span>Ignorar espaços extras e normalizar</span>
-                        </label>
-                        
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="ignoreFinalPeriod" checked>
-                            <span>Ignorar ponto final no final da frase</span>
-                        </label>
-                    </div>
-                    
-                    <div class="similarity-info">
-                        <i class="fas fa-info-circle"></i> 
-                        <strong>Como funciona:</strong> As questões são consideradas duplicatas se as perguntas forem similares após aplicar as regras acima. Pequenas variações como "Brasília" vs "Brasilia" ou "capital?" vs "capital" são ignoradas.
-                    </div>
+                    <textarea id="jsonInput" placeholder="Cole suas questões aqui..."></textarea>
                 </div>
                 
                 <div class="action-buttons">
+                    <div class="file-input-wrapper">
+                        <button class="btn btn-purple">
+                            <i class="fas fa-file-import"></i> Importar
+                        </button>
+                        <input type="file" id="fileInput" accept=".json, .txt, .js" />
+                    </div>
+                    
                     <button class="btn btn-primary" id="findDuplicatesBtn">
-                        <i class="fas fa-search"></i> Encontrar Duplicatas
+                        <i class="fas fa-search"></i> Buscar Duplicatas
                     </button>
-                    <button class="btn btn-warning" id="loadExampleBtn">
-                        <i class="fas fa-code"></i> Carregar Exemplo
+                    
+                    <button class="btn btn-info" id="batchModeBtn">
+                        <i class="fas fa-layer-group"></i> Batch
                     </button>
+                    
                     <button class="btn btn-danger" id="clearBtn">
                         <i class="fas fa-broom"></i> Limpar
                     </button>
                 </div>
                 
+                <!-- Modo Batch -->
+                <div class="batch-mode" id="batchMode" style="display: none;">
+                    <h4><i class="fas fa-layer-group"></i> Processar Múltiplos Arquivos</h4>
+                    <input type="file" id="batchFileInput" multiple accept=".json, .txt, .js" />
+                    <button class="btn btn-success" id="processBatchBtn">Processar</button>
+                </div>
+                
+                <!-- Opções (colapsáveis no mobile) -->
+                <details class="options-panel" open>
+                    <summary style="font-weight: bold; padding: 10px; cursor: pointer;">
+                        <i class="fas fa-sliders-h"></i> Opções de Comparação
+                    </summary>
+                    
+                    <div style="padding: 10px;">
+                        <div class="option-group">
+                            <h4>Básicas</h4>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="ignoreAccents" checked>
+                                <span>Ignorar acentos</span>
+                            </label>
+                            
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="ignoreCase" checked>
+                                <span>Ignorar maiúsculas</span>
+                            </label>
+                            
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="ignorePunctuation" checked>
+                                <span>Ignorar pontuação</span>
+                            </label>
+                            
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="ignoreSpaces" checked>
+                                <span>Ignorar espaços</span>
+                            </label>
+                            
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="ignoreFinalPeriod" checked>
+                                <span>Ignorar ponto final</span>
+                            </label>
+                        </div>
+                        
+                        <div class="option-group">
+                            <h4>Avançadas</h4>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="ignoreArticles">
+                                <span>Ignorar artigos</span>
+                            </label>
+                            
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="ignoreNumbers">
+                                <span>Ignorar números</span>
+                            </label>
+                            
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="fuzzyMatch">
+                                <span>Similaridade fuzzy</span>
+                            </label>
+                            
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="compareAlternatives">
+                                <span>Comparar alternativas</span>
+                            </label>
+                        </div>
+                    </div>
+                </details>
+                
+                <!-- Barra de Progresso -->
+                <div class="progress-bar" id="progressBar" style="display: none;">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                
+                <!-- Estatísticas -->
                 <div class="stats" id="stats" style="display: none;">
-                    <p><i class="fas fa-list"></i> Total de questões: <span id="totalQuestions">0</span></p>
-                    <p><i class="fas fa-copy"></i> Grupos duplicados: <span id="duplicateGroups">0</span></p>
-                    <p><i class="fas fa-times-circle"></i> Questões duplicadas: <span id="duplicateCount">0</span></p>
+                    <p><i class="fas fa-list"></i> Total: <span id="totalQuestions">0</span></p>
+                    <p><i class="fas fa-copy"></i> Grupos: <span id="duplicateGroups">0</span></p>
+                    <p><i class="fas fa-times-circle"></i> Duplicatas: <span id="duplicateCount">0</span></p>
+                    <p><i class="fas fa-check-circle"></i> Únicas: <span id="uniqueCount">0</span></p>
+                    <p><i class="fas fa-percent"></i> %: <span id="duplicatePercent">0%</span></p>
+                </div>
+                
+                <!-- Relatório de Qualidade -->
+                <div class="quality-report" id="qualityReport" style="display: none;">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Problemas Encontrados</h4>
+                    <ul id="qualityList"></ul>
                 </div>
             </div>
             
             <!-- Coluna de Duplicatas -->
             <div class="duplicates-section">
-                <h2 class="section-title"><i class="fas fa-copy"></i> Questões Duplicadas</h2>
+                <h2 class="section-title">
+                    <span><i class="fas fa-copy"></i> Duplicatas</span>
+                    <span class="keyboard-hint">
+                        <i class="fas fa-hand-pointer"></i> Toque para editar
+                    </span>
+                </h2>
                 
                 <div class="action-buttons">
                     <button class="btn btn-success" id="removeSelectedBtn" disabled>
                         <i class="fas fa-trash-alt"></i> Remover Selecionadas
                     </button>
+                    
                     <button class="btn btn-danger" id="removeAllDuplicatesBtn" disabled>
-                        <i class="fas fa-trash"></i> Remover Todas Duplicatas
+                        <i class="fas fa-trash"></i> Remover Todas
+                    </button>
+                    
+                    <button class="btn btn-warning" id="selectAllDuplicatesBtn" disabled>
+                        <i class="fas fa-check-double"></i> Selecionar Todas
                     </button>
                 </div>
                 
                 <div id="duplicatesContainer" class="duplicates-list">
                     <div class="no-duplicates">
                         <i class="fas fa-check-circle"></i>
-                        <p>Nenhuma duplicata encontrada ainda.<br>Cole suas questões e clique em "Encontrar Duplicatas".</p>
+                        <p>Nenhuma duplicata encontrada</p>
                     </div>
+                </div>
+                
+                <!-- Preview -->
+                <div class="output-preview">
+                    <div class="preview-header">
+                        <h3><i class="fas fa-eye"></i> Resultado:</h3>
+                        <div class="preview-actions">
+                            <button class="btn btn-info" id="copyOutputBtn" disabled>
+                                <i class="fas fa-copy"></i> Copiar
+                            </button>
+                            <button class="btn btn-success" id="exportBtn" disabled>
+                                <i class="fas fa-file-export"></i> Exportar
+                            </button>
+                        </div>
+                    </div>
+                    <textarea id="outputPreview" readonly placeholder="Resultado aparecerá aqui..."></textarea>
+                </div>
+                
+                <div class="footer-actions">
+                    <span class="keyboard-hint">
+                        <i class="fas fa-save"></i> Cache ativo
+                    </span>
+                    <span class="keyboard-hint">
+                        <i class="fas fa-edit"></i> Duplo toque para editar
+                    </span>
                 </div>
             </div>
         </div>
         
         <footer>
-            <p>Removedor de Duplicatas masterBank &copy; 2023 | Detecta variações de acentuação, pontuação e formatação</p>
+            <p>Removedor de Duplicatas masterBank © 2023 | Versão Mobile</p>
         </footer>
     </div>
 
@@ -480,20 +939,37 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Elementos DOM
             const jsonInput = document.getElementById('jsonInput');
+            const fileInput = document.getElementById('fileInput');
+            const batchFileInput = document.getElementById('batchFileInput');
             const findDuplicatesBtn = document.getElementById('findDuplicatesBtn');
-            const loadExampleBtn = document.getElementById('loadExampleBtn');
             const clearBtn = document.getElementById('clearBtn');
             const removeSelectedBtn = document.getElementById('removeSelectedBtn');
             const removeAllDuplicatesBtn = document.getElementById('removeAllDuplicatesBtn');
+            const selectAllDuplicatesBtn = document.getElementById('selectAllDuplicatesBtn');
+            const copyOutputBtn = document.getElementById('copyOutputBtn');
+            const exportBtn = document.getElementById('exportBtn');
             const duplicatesContainer = document.getElementById('duplicatesContainer');
+            const outputPreview = document.getElementById('outputPreview');
             const stats = document.getElementById('stats');
             const totalQuestionsSpan = document.getElementById('totalQuestions');
             const duplicateGroupsSpan = document.getElementById('duplicateGroups');
             const duplicateCountSpan = document.getElementById('duplicateCount');
+            const uniqueCountSpan = document.getElementById('uniqueCount');
+            const duplicatePercentSpan = document.getElementById('duplicatePercent');
             const successAlert = document.getElementById('successAlert');
             const errorAlert = document.getElementById('errorAlert');
             const successMessage = document.getElementById('successMessage');
             const errorMessage = document.getElementById('errorMessage');
+            const progressBar = document.getElementById('progressBar');
+            const progressFill = document.getElementById('progressFill');
+            const qualityReport = document.getElementById('qualityReport');
+            const qualityList = document.getElementById('qualityList');
+            const undoBtn = document.getElementById('undoBtn');
+            const redoBtn = document.getElementById('redoBtn');
+            const themeToggle = document.getElementById('themeToggle');
+            const batchModeBtn = document.getElementById('batchModeBtn');
+            const batchMode = document.getElementById('batchMode');
+            const processBatchBtn = document.getElementById('processBatchBtn');
             
             // Opções de comparação
             const ignoreAccents = document.getElementById('ignoreAccents');
@@ -501,12 +977,29 @@
             const ignorePunctuation = document.getElementById('ignorePunctuation');
             const ignoreSpaces = document.getElementById('ignoreSpaces');
             const ignoreFinalPeriod = document.getElementById('ignoreFinalPeriod');
+            const ignoreArticles = document.getElementById('ignoreArticles');
+            const ignoreNumbers = document.getElementById('ignoreNumbers');
+            const fuzzyMatch = document.getElementById('fuzzyMatch');
+            const compareAlternatives = document.getElementById('compareAlternatives');
             
-            // Armazenamento das questões atuais
+            // Armazenamento
             let currentQuestions = [];
             let duplicateGroups = [];
+            let history = [];
+            let historyIndex = -1;
+            let editingId = null;
             
-            // Função para normalizar texto baseado nas opções
+            // Cache local
+            loadFromCache();
+            
+            // Tema
+            let darkTheme = localStorage.getItem('darkTheme') === 'true';
+            if (darkTheme) {
+                document.body.classList.add('dark-theme');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i> Tema';
+            }
+            
+            // Função para normalizar texto
             function normalizeText(text) {
                 if (!text) return '';
                 
@@ -532,74 +1025,240 @@
                     normalized = normalized.replace(/\.$/, '');
                 }
                 
-                return normalized;
+                if (ignoreArticles.checked) {
+                    normalized = normalized.replace(/\b(o|a|os|as|um|uma)\b/g, '');
+                }
+                
+                if (ignoreNumbers.checked) {
+                    normalized = normalized.replace(/\d+/g, '');
+                }
+                
+                return normalized.replace(/\s+/g, ' ').trim();
             }
             
-            // Função para extrair array de questões do texto
+            // Similaridade fuzzy
+            function fuzzySimilarity(str1, str2) {
+                const len1 = str1.length;
+                const len2 = str2.length;
+                const matrix = Array(len1 + 1).fill().map(() => Array(len2 + 1).fill(0));
+                
+                for (let i = 0; i <= len1; i++) matrix[i][0] = i;
+                for (let j = 0; j <= len2; j++) matrix[0][j] = j;
+                
+                for (let i = 1; i <= len1; i++) {
+                    for (let j = 1; j <= len2; j++) {
+                        const cost = str1[i-1] === str2[j-1] ? 0 : 1;
+                        matrix[i][j] = Math.min(
+                            matrix[i-1][j] + 1,
+                            matrix[i][j-1] + 1,
+                            matrix[i-1][j-1] + cost
+                        );
+                    }
+                }
+                
+                const maxLen = Math.max(len1, len2);
+                const similarity = 1 - matrix[len1][len2] / maxLen;
+                return similarity > 0.9;
+            }
+            
+            // Parse de questões
             function parseQuestions(text) {
                 try {
-                    // Tenta avaliar o texto como JavaScript
-                    // Remove quebras de linha e espaços extras para facilitar o parsing
-                    const cleanText = text.replace(/\n/g, ' ').replace(/\s+/g, ' ');
+                    let cleanText = text.trim();
                     
-                    // Usa eval de forma segura? Melhor evitar eval se possível
-                    // Vamos usar Function constructor que é um pouco mais seguro que eval
-                    const parseFunction = new Function(`return ${cleanText}`);
-                    const result = parseFunction();
-                    
-                    if (Array.isArray(result)) {
-                        return result;
-                    } else {
-                        throw new Error('O conteúdo não é um array válido');
+                    if (!cleanText.startsWith('[')) {
+                        cleanText = '[' + cleanText + ']';
                     }
+                    
+                    let jsonStr = cleanText
+                        .replace(/([{,]\s*)([a-zA-Z0-9_]+)\s*:/g, '$1"$2":')
+                        .replace(/'/g, '"')
+                        .replace(/\n/g, ' ')
+                        .replace(/\s+/g, ' ')
+                        .replace(/,(\s*[}\]])/g, '$1');
+                    
+                    return JSON.parse(jsonStr);
                 } catch (e) {
-                    // Tenta um parsing mais flexível para o formato específico
-                    try {
-                        // Converte o formato {q: "...", a: [...], c: 0} para JSON válido
-                        let jsonStr = text
-                            .replace(/([{,]\s*)([a-zA-Z0-9_]+)\s*:/g, '$1"$2":') // Adiciona aspas nas chaves
-                            .replace(/'/g, '"') // Troca aspas simples por duplas
-                            .replace(/\n/g, ' ') // Remove quebras de linha
-                            .replace(/\s+/g, ' '); // Normaliza espaços
-                        
-                        return JSON.parse(jsonStr);
-                    } catch (e2) {
-                        throw new Error('Formato inválido. Use o formato masterBank: [{q: "...", a: ["...", "..."], c: 0}]');
+                    // Parsing manual para mobile
+                    const questions = [];
+                    const matches = text.match(/{[^}]+}/g);
+                    
+                    if (matches) {
+                        matches.forEach(match => {
+                            try {
+                                const q = match.match(/q:\s*"([^"]*)"/);
+                                const aMatch = match.match(/a:\s*\[(.*?)\]/);
+                                const c = match.match(/c:\s*(\d+)/);
+                                
+                                if (q && aMatch && c) {
+                                    const altStr = aMatch[1];
+                                    const altMatches = altStr.match(/"([^"]*)"/g);
+                                    const alternatives = altMatches ? altMatches.map(m => m.replace(/"/g, '')) : [];
+                                    
+                                    if (alternatives.length === 4) {
+                                        questions.push({
+                                            q: q[1],
+                                            a: alternatives,
+                                            c: parseInt(c[1])
+                                        });
+                                    }
+                                }
+                            } catch (e) {}
+                        });
                     }
+                    
+                    if (questions.length > 0) return questions;
+                    throw new Error('Formato inválido');
                 }
             }
             
-            // Função para encontrar duplicatas
-            function findDuplicates() {
+            // Validação
+            function validateQuestions(questions) {
+                const issues = [];
+                
+                questions.forEach((q, index) => {
+                    if (!q.q || q.q.trim() === '') {
+                        issues.push(`Questão ${index + 1}: Pergunta vazia`);
+                    }
+                    
+                    if (!Array.isArray(q.a) || q.a.length !== 4) {
+                        issues.push(`Questão ${index + 1}: Deve ter 4 alternativas`);
+                    } else {
+                        q.a.forEach((alt, i) => {
+                            if (!alt || alt.trim() === '') {
+                                issues.push(`Questão ${index + 1}: Alternativa ${String.fromCharCode(65 + i)} vazia`);
+                            }
+                        });
+                    }
+                    
+                    if (q.c === undefined || q.c < 0 || q.c > 3) {
+                        issues.push(`Questão ${index + 1}: Índice da correta inválido`);
+                    }
+                });
+                
+                return issues;
+            }
+            
+            // Cache
+            function saveToCache() {
+                localStorage.setItem('lastQuestions', jsonInput.value);
+                localStorage.setItem('lastOptions', JSON.stringify({
+                    ignoreAccents: ignoreAccents.checked,
+                    ignoreCase: ignoreCase.checked,
+                    ignorePunctuation: ignorePunctuation.checked,
+                    ignoreSpaces: ignoreSpaces.checked,
+                    ignoreFinalPeriod: ignoreFinalPeriod.checked,
+                    ignoreArticles: ignoreArticles.checked,
+                    ignoreNumbers: ignoreNumbers.checked,
+                    fuzzyMatch: fuzzyMatch.checked,
+                    compareAlternatives: compareAlternatives.checked
+                }));
+            }
+            
+            function loadFromCache() {
+                const saved = localStorage.getItem('lastQuestions');
+                if (saved) jsonInput.value = saved;
+                
+                const options = localStorage.getItem('lastOptions');
+                if (options) {
+                    const opts = JSON.parse(options);
+                    ignoreAccents.checked = opts.ignoreAccents ?? true;
+                    ignoreCase.checked = opts.ignoreCase ?? true;
+                    ignorePunctuation.checked = opts.ignorePunctuation ?? true;
+                    ignoreSpaces.checked = opts.ignoreSpaces ?? true;
+                    ignoreFinalPeriod.checked = opts.ignoreFinalPeriod ?? true;
+                    ignoreArticles.checked = opts.ignoreArticles ?? false;
+                    ignoreNumbers.checked = opts.ignoreNumbers ?? false;
+                    fuzzyMatch.checked = opts.fuzzyMatch ?? false;
+                    compareAlternatives.checked = opts.compareAlternatives ?? false;
+                }
+            }
+            
+            // Histórico
+            function addToHistory(questions) {
+                if (historyIndex < history.length - 1) {
+                    history = history.slice(0, historyIndex + 1);
+                }
+                
+                history.push(JSON.parse(JSON.stringify(questions)));
+                historyIndex = history.length - 1;
+                
+                if (history.length > 20) history.shift();
+                updateHistoryButtons();
+            }
+            
+            function undo() {
+                if (historyIndex > 0) {
+                    historyIndex--;
+                    currentQuestions = JSON.parse(JSON.stringify(history[historyIndex]));
+                    updateFromCurrent();
+                    showSuccess('Desfeito');
+                }
+            }
+            
+            function redo() {
+                if (historyIndex < history.length - 1) {
+                    historyIndex++;
+                    currentQuestions = JSON.parse(JSON.stringify(history[historyIndex]));
+                    updateFromCurrent();
+                    showSuccess('Refeito');
+                }
+            }
+            
+            function updateHistoryButtons() {
+                undoBtn.disabled = historyIndex <= 0;
+                redoBtn.disabled = historyIndex >= history.length - 1;
+            }
+            
+            // Progresso
+            function showProgress(percent) {
+                progressBar.style.display = 'block';
+                progressFill.style.width = percent + '%';
+                
+                if (percent >= 100) {
+                    setTimeout(() => progressBar.style.display = 'none', 500);
+                }
+            }
+            
+            // Buscar duplicatas
+            async function findDuplicates() {
                 try {
                     const text = jsonInput.value.trim();
                     if (!text) {
-                        showError('Cole as questões no campo de entrada.');
+                        showError('Cole as questões primeiro');
                         return;
                     }
                     
-                    // Parse das questões
+                    showProgress(10);
+                    
                     currentQuestions = parseQuestions(text);
                     
+                    showProgress(30);
+                    
+                    const issues = validateQuestions(currentQuestions);
+                    if (issues.length > 0) {
+                        qualityReport.style.display = 'block';
+                        qualityList.innerHTML = issues.map(issue => `<li><i class="fas fa-exclamation-circle"></i> ${issue}</li>`).join('');
+                    } else {
+                        qualityReport.style.display = 'none';
+                    }
+                    
                     if (currentQuestions.length === 0) {
-                        showError('Nenhuma questão encontrada.');
+                        showError('Nenhuma questão encontrada');
                         return;
                     }
                     
-                    // Valida cada questão
-                    for (let i = 0; i < currentQuestions.length; i++) {
-                        const q = currentQuestions[i];
-                        if (!q.q || !Array.isArray(q.a) || q.a.length !== 4 || q.c === undefined) {
-                            showError(`Questão ${i+1} está com formato inválido. Cada questão deve ter q (string), a (array com 4 alternativas) e c (número 0-3).`);
-                            return;
-                        }
-                    }
+                    showProgress(50);
                     
-                    // Mapa para agrupar questões similares
                     const questionMap = new Map();
                     
                     currentQuestions.forEach((question, index) => {
-                        const normalizedQ = normalizeText(question.q);
+                        let normalizedQ = normalizeText(question.q);
+                        
+                        if (compareAlternatives.checked) {
+                            const altText = question.a.map(a => normalizeText(a)).join('|');
+                            normalizedQ += '|' + altText;
+                        }
                         
                         if (!questionMap.has(normalizedQ)) {
                             questionMap.set(normalizedQ, []);
@@ -611,7 +1270,24 @@
                         });
                     });
                     
-                    // Filtra apenas grupos com mais de uma questão
+                    if (fuzzyMatch.checked) {
+                        const keys = Array.from(questionMap.keys());
+                        for (let i = 0; i < keys.length; i++) {
+                            for (let j = i + 1; j < keys.length; j++) {
+                                if (fuzzySimilarity(keys[i], keys[j])) {
+                                    const group1 = questionMap.get(keys[i]);
+                                    const group2 = questionMap.get(keys[j]);
+                                    questionMap.set(keys[i], [...group1, ...group2]);
+                                    questionMap.delete(keys[j]);
+                                    keys.splice(j, 1);
+                                    j--;
+                                }
+                            }
+                        }
+                    }
+                    
+                    showProgress(80);
+                    
                     duplicateGroups = Array.from(questionMap.entries())
                         .filter(([_, questions]) => questions.length > 1)
                         .map(([normalizedQ, questions]) => ({
@@ -619,39 +1295,46 @@
                             questions: questions.sort((a, b) => a.originalIndex - b.originalIndex)
                         }));
                     
-                    // Atualiza estatísticas
-                    totalQuestionsSpan.textContent = currentQuestions.length;
+                    const total = currentQuestions.length;
+                    const duplicateTotal = duplicateGroups.reduce((acc, group) => acc + group.questions.length, 0);
+                    const unique = total - duplicateTotal + duplicateGroups.length;
+                    const percent = ((duplicateTotal / total) * 100).toFixed(1);
+                    
+                    totalQuestionsSpan.textContent = total;
                     duplicateGroupsSpan.textContent = duplicateGroups.length;
+                    duplicateCountSpan.textContent = duplicateTotal;
+                    uniqueCountSpan.textContent = unique;
+                    duplicatePercentSpan.textContent = percent + '%';
                     
-                    const duplicateCount = duplicateGroups.reduce((acc, group) => acc + group.questions.length, 0);
-                    duplicateCountSpan.textContent = duplicateCount;
+                    stats.style.display = 'grid';
                     
-                    stats.style.display = 'block';
+                    showProgress(100);
                     
-                    // Renderiza duplicatas
                     renderDuplicates();
-                    
-                    // Habilita botões
+                    updatePreview();
                     updateButtonsState();
                     
+                    addToHistory(currentQuestions);
+                    
                     if (duplicateGroups.length === 0) {
-                        showSuccess('Nenhuma duplicata encontrada! Todas as questões são únicas.');
+                        showSuccess('Nenhuma duplicata encontrada');
                     } else {
-                        showSuccess(`Encontradas ${duplicateGroups.length} grupo(s) com ${duplicateCount} questões duplicadas.`);
+                        showSuccess(`${duplicateGroups.length} grupos com ${duplicateTotal} duplicatas`);
                     }
                     
                 } catch (error) {
-                    showError('Erro ao processar: ' + error.message);
+                    showError('Erro: ' + error.message);
+                    progressBar.style.display = 'none';
                 }
             }
             
-            // Função para renderizar grupos de duplicatas
+            // Renderizar duplicatas (versão mobile)
             function renderDuplicates() {
                 if (duplicateGroups.length === 0) {
                     duplicatesContainer.innerHTML = `
                         <div class="no-duplicates">
                             <i class="fas fa-check-circle"></i>
-                            <p>Nenhuma duplicata encontrada!<br>Todas as questões são únicas.</p>
+                            <p>Todas as questões são únicas!</p>
                         </div>
                     `;
                     return;
@@ -665,14 +1348,14 @@
                             <div class="group-header">
                                 <div>
                                     <i class="fas fa-copy"></i> 
-                                    Grupo ${groupIndex + 1} - ${group.questions.length} questões similares
+                                    Grupo ${groupIndex + 1} (${group.questions.length})
                                 </div>
                                 <div class="group-actions">
                                     <button class="btn btn-success btn-sm select-all-group" data-group-index="${groupIndex}">
-                                        <i class="fas fa-check-double"></i> Selecionar todas
+                                        Selecionar
                                     </button>
                                     <button class="btn btn-danger btn-sm remove-group" data-group-index="${groupIndex}">
-                                        <i class="fas fa-trash"></i> Remover grupo
+                                        Remover
                                     </button>
                                 </div>
                             </div>
@@ -681,25 +1364,35 @@
                     
                     group.questions.forEach((question, questionIndex) => {
                         const correctLetter = ['A', 'B', 'C', 'D'][question.c];
+                        const isEditing = editingId === `q_${groupIndex}_${questionIndex}`;
                         
                         html += `
-                            <div class="question-item">
+                            <div class="question-item" 
+                                 ondblclick="startEditing('${groupIndex}_${questionIndex}')"
+                                 ontouchstart="touchStart('${groupIndex}_${questionIndex}')"
+                                 data-id="${groupIndex}_${questionIndex}">
                                 <input type="checkbox" class="duplicate-checkbox" 
                                        data-group-index="${groupIndex}" 
-                                       data-question-index="${question.originalIndex}"
-                                       id="chk_${groupIndex}_${questionIndex}">
+                                       data-question-index="${question.originalIndex}">
                                 <div class="question-content">
-                                    <div class="question-text">${escapeHtml(question.q)}</div>
-                                    <div class="alternatives-preview">
-                                        A: ${escapeHtml(question.a[0])} | 
-                                        B: ${escapeHtml(question.a[1])} | 
-                                        C: ${escapeHtml(question.a[2])} | 
-                                        D: ${escapeHtml(question.a[3])}
-                                    </div>
-                                    <div class="question-meta">
-                                        <span>Posição: #${question.originalIndex + 1}</span>
-                                        <span class="correct-badge">Correta: ${correctLetter}</span>
-                                    </div>
+                                    ${isEditing ? 
+                                        `<textarea class="edit-input" id="edit_${groupIndex}_${questionIndex}" rows="2">${escapeHtml(question.q)}</textarea>
+                                         <div class="edit-actions">
+                                             <button class="btn btn-success" onclick="saveEdit('${groupIndex}_${questionIndex}', ${question.originalIndex})">Salvar</button>
+                                             <button class="btn btn-danger" onclick="cancelEdit()">Cancelar</button>
+                                         </div>` :
+                                        `<div class="question-text">${escapeHtml(question.q)}</div>
+                                         <div class="alternatives-preview">
+                                            A: ${escapeHtml(question.a[0])}<br>
+                                            B: ${escapeHtml(question.a[1])}<br>
+                                            C: ${escapeHtml(question.a[2])}<br>
+                                            D: ${escapeHtml(question.a[3])}
+                                         </div>
+                                         <div class="question-meta">
+                                            <span>#${question.originalIndex + 1}</span>
+                                            <span class="correct-badge">${correctLetter}</span>
+                                         </div>`
+                                    }
                                 </div>
                             </div>
                         `;
@@ -713,25 +1406,22 @@
                 
                 duplicatesContainer.innerHTML = html;
                 
-                // Adiciona eventos para os novos botões
+                // Event listeners
                 document.querySelectorAll('.select-all-group').forEach(btn => {
-                    btn.addEventListener('click', function() {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
                         const groupIndex = this.dataset.groupIndex;
-                        const checkboxes = document.querySelectorAll(`.duplicate-checkbox[data-group-index="${groupIndex}"]`);
-                        const allChecked = Array.from(checkboxes).every(cb => cb.checked);
-                        
-                        checkboxes.forEach(cb => {
-                            cb.checked = !allChecked;
+                        document.querySelectorAll(`.duplicate-checkbox[data-group-index="${groupIndex}"]`).forEach(cb => {
+                            cb.checked = true;
                         });
-                        
                         updateButtonsState();
                     });
                 });
                 
                 document.querySelectorAll('.remove-group').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const groupIndex = parseInt(this.dataset.groupIndex);
-                        removeGroup(groupIndex);
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        removeGroup(parseInt(this.dataset.groupIndex));
                     });
                 });
                 
@@ -740,185 +1430,297 @@
                 });
             }
             
-            // Função auxiliar para escapar HTML
+            // Touch events para mobile
+            let touchTimeout;
+            function touchStart(id) {
+                touchTimeout = setTimeout(() => startEditing(id), 500);
+            }
+            
+            document.addEventListener('touchend', () => clearTimeout(touchTimeout));
+            
+            // Editor inline
+            window.startEditing = function(id) {
+                if (editingId) cancelEdit();
+                editingId = id;
+                renderDuplicates();
+                
+                setTimeout(() => {
+                    const textarea = document.getElementById(`edit_${id}`);
+                    if (textarea) textarea.focus();
+                }, 100);
+            };
+            
+            window.saveEdit = function(id, originalIndex) {
+                const textarea = document.getElementById(`edit_${id}`);
+                if (textarea) {
+                    currentQuestions[originalIndex].q = textarea.value;
+                    updateTextareaFromCurrent();
+                    editingId = null;
+                    findDuplicates();
+                    showSuccess('Editado');
+                }
+            };
+            
+            window.cancelEdit = function() {
+                editingId = null;
+                renderDuplicates();
+            };
+            
             function escapeHtml(text) {
                 const div = document.createElement('div');
                 div.textContent = text;
                 return div.innerHTML;
             }
             
-            // Função para remover um grupo inteiro
+            function updatePreview() {
+                if (currentQuestions.length > 0) {
+                    let output = '[\n';
+                    
+                    currentQuestions.forEach((q, index) => {
+                        output += `  {q: "${escapeJson(q.q)}", a: ["${escapeJson(q.a[0])}", "${escapeJson(q.a[1])}", "${escapeJson(q.a[2])}", "${escapeJson(q.a[3])}"], c: ${q.c}}`;
+                        
+                        if (index < currentQuestions.length - 1) output += ',\n';
+                        else output += '\n';
+                    });
+                    
+                    output += ']';
+                    outputPreview.value = output;
+                    copyOutputBtn.disabled = false;
+                    exportBtn.disabled = false;
+                } else {
+                    outputPreview.value = '';
+                    copyOutputBtn.disabled = true;
+                    exportBtn.disabled = true;
+                }
+            }
+            
+            function escapeJson(str) {
+                return str.replace(/"/g, '\\"').replace(/\n/g, ' ');
+            }
+            
             function removeGroup(groupIndex) {
                 const group = duplicateGroups[groupIndex];
                 const indicesToRemove = group.questions.map(q => q.originalIndex);
-                
-                // Filtra as questões atuais removendo as do grupo
                 currentQuestions = currentQuestions.filter((_, index) => !indicesToRemove.includes(index));
-                
-                // Atualiza o texto no textarea
                 updateTextareaFromCurrent();
-                
-                // Recalcula duplicatas
                 findDuplicates();
-                
-                showSuccess(`Grupo ${groupIndex + 1} removido com sucesso!`);
+                showSuccess('Grupo removido');
             }
             
-            // Função para remover questões selecionadas
             function removeSelected() {
-                const selectedCheckboxes = document.querySelectorAll('.duplicate-checkbox:checked');
-                
-                if (selectedCheckboxes.length === 0) {
-                    showError('Selecione pelo menos uma questão para remover.');
+                const selected = document.querySelectorAll('.duplicate-checkbox:checked');
+                if (selected.length === 0) {
+                    showError('Selecione questões');
                     return;
                 }
                 
-                const indicesToRemove = new Set();
+                const indices = new Set();
+                selected.forEach(cb => indices.add(parseInt(cb.dataset.questionIndex)));
                 
-                selectedCheckboxes.forEach(cb => {
-                    const questionIndex = parseInt(cb.dataset.questionIndex);
-                    indicesToRemove.add(questionIndex);
-                });
-                
-                // Filtra as questões atuais removendo as selecionadas
-                currentQuestions = currentQuestions.filter((_, index) => !indicesToRemove.has(index));
-                
-                // Atualiza o texto no textarea
+                currentQuestions = currentQuestions.filter((_, index) => !indices.has(index));
                 updateTextareaFromCurrent();
-                
-                // Recalcula duplicatas
                 findDuplicates();
-                
-                showSuccess(`${selectedCheckboxes.length} questão(ões) removida(s) com sucesso!`);
+                showSuccess(`${selected.length} removidas`);
             }
             
-            // Função para remover todas as duplicatas (mantém apenas uma de cada grupo)
             function removeAllDuplicates() {
-                if (duplicateGroups.length === 0) {
-                    showError('Não há duplicatas para remover.');
-                    return;
-                }
+                if (duplicateGroups.length === 0) return;
                 
-                // Conjunto de índices para manter (primeira de cada grupo)
-                const indicesToKeep = new Set();
-                const allQuestions = [...currentQuestions];
+                const keepIndices = new Set();
+                const seen = new Set();
                 
-                // Mapa para rastrear quais perguntas já foram mantidas
-                const keptNormalized = new Set();
-                
-                allQuestions.forEach((question, index) => {
-                    const normalizedQ = normalizeText(question.q);
-                    
-                    if (!keptNormalized.has(normalizedQ)) {
-                        keptNormalized.add(normalizedQ);
-                        indicesToKeep.add(index);
+                currentQuestions.forEach((q, index) => {
+                    const key = normalizeText(q.q);
+                    if (!seen.has(key)) {
+                        seen.add(key);
+                        keepIndices.add(index);
                     }
                 });
                 
-                // Filtra mantendo apenas os índices selecionados
-                currentQuestions = allQuestions.filter((_, index) => indicesToKeep.has(index));
-                
-                // Atualiza o texto no textarea
+                currentQuestions = currentQuestions.filter((_, index) => keepIndices.has(index));
                 updateTextareaFromCurrent();
-                
-                // Recalcula duplicatas
                 findDuplicates();
-                
-                showSuccess('Todas as duplicatas foram removidas! Mantida apenas uma de cada pergunta.');
+                showSuccess('Todas duplicatas removidas');
             }
             
-            // Função para atualizar o textarea com as questões atuais
+            function selectAllDuplicates() {
+                document.querySelectorAll('.duplicate-checkbox').forEach(cb => cb.checked = true);
+                updateButtonsState();
+            }
+            
             function updateTextareaFromCurrent() {
                 let output = '[\n';
                 
                 currentQuestions.forEach((q, index) => {
                     output += `  {q: "${escapeJson(q.q)}", a: ["${escapeJson(q.a[0])}", "${escapeJson(q.a[1])}", "${escapeJson(q.a[2])}", "${escapeJson(q.a[3])}"], c: ${q.c}}`;
                     
-                    if (index < currentQuestions.length - 1) {
-                        output += ',\n';
-                    } else {
-                        output += '\n';
-                    }
+                    if (index < currentQuestions.length - 1) output += ',\n';
+                    else output += '\n';
                 });
                 
                 output += ']';
                 jsonInput.value = output;
+                saveToCache();
             }
             
-            // Função auxiliar para escapar JSON
-            function escapeJson(str) {
-                return str.replace(/"/g, '\\"').replace(/\n/g, ' ');
-            }
-            
-            // Função para atualizar estado dos botões
             function updateButtonsState() {
                 const hasDuplicates = duplicateGroups.length > 0;
                 const hasSelected = document.querySelectorAll('.duplicate-checkbox:checked').length > 0;
                 
                 removeSelectedBtn.disabled = !hasSelected;
                 removeAllDuplicatesBtn.disabled = !hasDuplicates;
+                selectAllDuplicatesBtn.disabled = !hasDuplicates;
             }
             
-            // Funções de alerta
-            function showSuccess(message) {
-                successMessage.textContent = message;
+            function copyPreview() {
+                outputPreview.select();
+                outputPreview.setSelectionRange(0, 99999);
+                navigator.clipboard.writeText(outputPreview.value);
+                showSuccess('Copiado!');
+            }
+            
+            function exportJson() {
+                const blob = new Blob([outputPreview.value], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `questoes-${new Date().toISOString().slice(0,10)}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+                showSuccess('Exportado!');
+            }
+            
+            function importFile() {
+                const file = fileInput.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    jsonInput.value = e.target.result;
+                    showSuccess('Importado');
+                    fileInput.value = '';
+                };
+                reader.readAsText(file);
+            }
+            
+            function processBatch() {
+                const files = batchFileInput.files;
+                if (files.length === 0) {
+                    showError('Selecione arquivos');
+                    return;
+                }
+                
+                let allQuestions = [];
+                let filesProcessed = 0;
+                
+                showProgress(0);
+                
+                Array.from(files).forEach((file) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        try {
+                            const questions = parseQuestions(e.target.result);
+                            allQuestions = [...allQuestions, ...questions];
+                            
+                            filesProcessed++;
+                            showProgress((filesProcessed / files.length) * 100);
+                            
+                            if (filesProcessed === files.length) {
+                                const unique = new Map();
+                                allQuestions.forEach((q) => {
+                                    const key = normalizeText(q.q);
+                                    if (!unique.has(key)) unique.set(key, q);
+                                });
+                                
+                                currentQuestions = Array.from(unique.values());
+                                updateTextareaFromCurrent();
+                                findDuplicates();
+                                showSuccess(`${currentQuestions.length} questões únicas`);
+                                batchMode.style.display = 'none';
+                            }
+                        } catch (error) {
+                            showError(`Erro em ${file.name}`);
+                        }
+                    };
+                    reader.readAsText(file);
+                });
+            }
+            
+            function toggleTheme() {
+                document.body.classList.toggle('dark-theme');
+                darkTheme = !darkTheme;
+                localStorage.setItem('darkTheme', darkTheme);
+                themeToggle.innerHTML = darkTheme ? 
+                    '<i class="fas fa-sun"></i> Tema' : 
+                    '<i class="fas fa-moon"></i> Tema';
+            }
+            
+            function toggleBatchMode() {
+                batchMode.style.display = batchMode.style.display === 'none' ? 'block' : 'none';
+            }
+            
+            function clearAll() {
+                if (confirm('Limpar tudo?')) {
+                    jsonInput.value = '';
+                    outputPreview.value = '';
+                    duplicatesContainer.innerHTML = `
+                        <div class="no-duplicates">
+                            <i class="fas fa-check-circle"></i>
+                            <p>Nenhuma duplicata encontrada</p>
+                        </div>
+                    `;
+                    stats.style.display = 'none';
+                    qualityReport.style.display = 'none';
+                    currentQuestions = [];
+                    duplicateGroups = [];
+                    history = [];
+                    historyIndex = -1;
+                    updateHistoryButtons();
+                    updateButtonsState();
+                    copyOutputBtn.disabled = true;
+                    exportBtn.disabled = true;
+                    saveToCache();
+                    showSuccess('Limpo!');
+                }
+            }
+            
+            function updateFromCurrent() {
+                updateTextareaFromCurrent();
+                findDuplicates();
+            }
+            
+            function showSuccess(msg) {
+                successMessage.textContent = msg;
                 successAlert.style.display = 'block';
                 errorAlert.style.display = 'none';
-                
-                setTimeout(() => {
-                    successAlert.style.display = 'none';
-                }, 3000);
+                setTimeout(() => successAlert.style.display = 'none', 2000);
             }
             
-            function showError(message) {
-                errorMessage.textContent = message;
+            function showError(msg) {
+                errorMessage.textContent = msg;
                 errorAlert.style.display = 'block';
                 successAlert.style.display = 'none';
             }
             
-            // Carregar exemplo
-            function loadExample() {
-                jsonInput.value = `[
-  {q: "Qual é a capital do Brasil?", a: ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"], c: 2},
-  {q: "Qual é a capital do Brasil?", a: ["São Paulo", "Rio de Janeiro", "Brasilia", "Salvador"], c: 2},
-  {q: "Qual a capital do Brasil?", a: ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"], c: 2},
-  {q: "Quem descobriu o Brasil?", a: ["Cabral", "Colombo", "Vespucci", "Cabral"], c: 0},
-  {q: "Quem descobriu o Brasil?", a: ["Pedro Cabral", "Cristovão Colombo", "Américo Vespúcio", "Pedro Álvares Cabral"], c: 3},
-  {q: "Em que ano o Brasil foi descoberto?", a: ["1500", "1492", "1501", "1499"], c: 0},
-  {q: "Em que ano o Brasil foi descoberto?", a: ["1500", "1492", "1500", "1499"], c: 0},
-  {q: "Em que ano o Brasil foi descoberto?", a: ["1500", "1492", "1500", "1499"], c: 2}
-]`;
-                findDuplicates();
-            }
-            
-            // Limpar tudo
-            function clearAll() {
-                if (confirm('Tem certeza que deseja limpar tudo?')) {
-                    jsonInput.value = '';
-                    duplicatesContainer.innerHTML = `
-                        <div class="no-duplicates">
-                            <i class="fas fa-check-circle"></i>
-                            <p>Nenhuma duplicata encontrada ainda.<br>Cole suas questões e clique em "Encontrar Duplicatas".</p>
-                        </div>
-                    `;
-                    stats.style.display = 'none';
-                    currentQuestions = [];
-                    duplicateGroups = [];
-                    removeSelectedBtn.disabled = true;
-                    removeAllDuplicatesBtn.disabled = true;
-                    showSuccess('Tudo limpo com sucesso!');
-                }
-            }
-            
             // Event listeners
             findDuplicatesBtn.addEventListener('click', findDuplicates);
-            loadExampleBtn.addEventListener('click', loadExample);
             clearBtn.addEventListener('click', clearAll);
             removeSelectedBtn.addEventListener('click', removeSelected);
             removeAllDuplicatesBtn.addEventListener('click', removeAllDuplicates);
+            selectAllDuplicatesBtn.addEventListener('click', selectAllDuplicates);
+            copyOutputBtn.addEventListener('click', copyPreview);
+            exportBtn.addEventListener('click', exportJson);
+            fileInput.addEventListener('change', importFile);
+            undoBtn.addEventListener('click', undo);
+            redoBtn.addEventListener('click', redo);
+            themeToggle.addEventListener('click', toggleTheme);
+            batchModeBtn.addEventListener('click', toggleBatchMode);
+            processBatchBtn.addEventListener('click', processBatch);
             
-            // Inicializa com exemplo
-            loadExample();
+            // Prevenir zoom em double-tap
+            document.addEventListener('touchstart', (e) => {
+                if (e.touches.length > 1) e.preventDefault();
+            }, { passive: false });
         });
     </script>
 </body>
