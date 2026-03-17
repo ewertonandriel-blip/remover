@@ -263,217 +263,6 @@
             min-width: 80px;
         }
         
-        .options-panel {
-            background-color: #f8f9fa;
-            border-radius: var(--border-radius);
-            padding: 12px;
-            margin: 15px 0;
-        }
-        
-        body.dark-theme .options-panel {
-            background-color: var(--dark-bg);
-        }
-        
-        .option-group {
-            margin-bottom: 15px;
-        }
-        
-        .option-group h4 {
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-        }
-        
-        .checkbox-label {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            padding: 5px 0;
-        }
-        
-        .checkbox-label input {
-            margin-right: 10px;
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-        }
-        
-        .stats {
-            background-color: #e2e8f0;
-            border-radius: var(--border-radius);
-            padding: 12px;
-            margin-top: 15px;
-            font-size: 0.9rem;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-        
-        @media (min-width: 480px) {
-            .stats {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        
-        body.dark-theme .stats {
-            background-color: var(--dark-border);
-        }
-        
-        .duplicates-list {
-            max-height: 500px;
-            overflow-y: auto;
-            margin-bottom: 15px;
-            -webkit-overflow-scrolling: touch;
-        }
-        
-        .duplicate-group {
-            border: 1px solid #e0e0e0;
-            border-radius: var(--border-radius);
-            margin-bottom: 12px;
-        }
-        
-        body.dark-theme .duplicate-group {
-            border-color: var(--dark-border);
-        }
-        
-        .group-header {
-            background-color: #fed7d7;
-            padding: 12px;
-            border-radius: var(--border-radius) var(--border-radius) 0 0;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        @media (min-width: 480px) {
-            .group-header {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-        }
-        
-        body.dark-theme .group-header {
-            background-color: #742a2a;
-            color: #fed7d7;
-        }
-        
-        .group-actions {
-            display: flex;
-            gap: 8px;
-            width: 100%;
-        }
-        
-        @media (min-width: 480px) {
-            .group-actions {
-                width: auto;
-            }
-        }
-        
-        .group-actions button {
-            flex: 1;
-            padding: 8px;
-            font-size: 0.8rem;
-        }
-        
-        .question-item {
-            padding: 12px;
-            border-bottom: 1px solid #e0e0e0;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        @media (min-width: 480px) {
-            .question-item {
-                flex-direction: row;
-                align-items: flex-start;
-            }
-        }
-        
-        .question-item input[type="checkbox"] {
-            width: 22px;
-            height: 22px;
-            margin-right: 5px;
-        }
-        
-        .question-text {
-            font-weight: 600;
-            font-size: 0.95rem;
-            margin-bottom: 5px;
-            word-break: break-word;
-        }
-        
-        .alternatives-preview {
-            font-size: 0.8rem;
-            color: #666;
-            margin-bottom: 5px;
-            word-break: break-word;
-        }
-        
-        body.dark-theme .alternatives-preview {
-            color: #a0aec0;
-        }
-        
-        .question-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            font-size: 0.75rem;
-        }
-        
-        .correct-badge {
-            background-color: #c6f6d5;
-            color: #22543d;
-            padding: 2px 8px;
-            border-radius: 12px;
-            display: inline-block;
-        }
-        
-        .output-preview {
-            margin-top: 15px;
-            border-top: 2px solid #e0e0e0;
-            padding-top: 12px;
-        }
-        
-        .preview-header {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 10px;
-        }
-        
-        @media (min-width: 480px) {
-            .preview-header {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-        }
-        
-        .preview-actions {
-            display: flex;
-            gap: 8px;
-            width: 100%;
-        }
-        
-        @media (min-width: 480px) {
-            .preview-actions {
-                width: auto;
-            }
-        }
-        
-        .preview-actions button {
-            flex: 1;
-            padding: 10px;
-        }
-        
-        .output-preview textarea {
-            height: 250px;
-            font-size: 0.8rem;
-        }
-        
         .batch-mode {
             margin-top: 12px;
             padding: 12px;
@@ -526,21 +315,46 @@
             border: 1px solid #f5c6cb;
         }
         
+        .progress-container {
+            width: 100%;
+            margin: 15px 0;
+            display: none;
+        }
+        
         .progress-bar {
             width: 100%;
-            height: 20px;
+            height: 24px;
             background-color: #e0e0e0;
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
-            margin: 10px 0;
-            display: none;
+            position: relative;
         }
         
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             width: 0%;
-            transition: width 0.3s;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+        
+        .progress-status {
+            text-align: center;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            color: var(--primary);
+            font-weight: 500;
         }
         
         .file-input-wrapper {
@@ -631,6 +445,10 @@
             color: #cbd5e0;
             margin-bottom: 15px;
         }
+        
+        .options-panel {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -704,67 +522,25 @@
                     <button class="btn btn-success" id="processBatchBtn">Processar</button>
                 </div>
                 
-                <details class="options-panel" open>
-                    <summary style="font-weight: bold; padding: 10px; cursor: pointer;">
-                        <i class="fas fa-sliders-h"></i> Opções de Comparação
-                    </summary>
-                    
-                    <div style="padding: 10px;">
-                        <div class="option-group">
-                            <h4>Básicas</h4>
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="ignoreAccents" checked>
-                                <span>Ignorar acentos</span>
-                            </label>
-                            
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="ignoreCase" checked>
-                                <span>Ignorar maiúsculas</span>
-                            </label>
-                            
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="ignorePunctuation" checked>
-                                <span>Ignorar pontuação</span>
-                            </label>
-                            
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="ignoreSpaces" checked>
-                                <span>Ignorar espaços</span>
-                            </label>
-                            
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="ignoreFinalPeriod" checked>
-                                <span>Ignorar ponto final</span>
-                            </label>
-                        </div>
-                        
-                        <div class="option-group">
-                            <h4>Avançadas</h4>
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="ignoreArticles">
-                                <span>Ignorar artigos</span>
-                            </label>
-                            
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="ignoreNumbers">
-                                <span>Ignorar números</span>
-                            </label>
-                            
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="fuzzyMatch">
-                                <span>Similaridade fuzzy</span>
-                            </label>
-                            
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="compareAlternatives">
-                                <span>Comparar alternativas</span>
-                            </label>
-                        </div>
+                <div class="progress-container" id="progressContainer">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                        <span class="progress-text" id="progressText">0%</span>
                     </div>
-                </details>
+                    <div class="progress-status" id="progressStatus">Iniciando...</div>
+                </div>
                 
-                <div class="progress-bar" id="progressBar" style="display: none;">
-                    <div class="progress-fill" id="progressFill"></div>
+                <div class="options-panel">
+                    <!-- Opções ocultas, mas existentes para manter a funcionalidade -->
+                    <input type="checkbox" id="ignoreAccents" checked style="display:none;">
+                    <input type="checkbox" id="ignoreCase" checked style="display:none;">
+                    <input type="checkbox" id="ignorePunctuation" checked style="display:none;">
+                    <input type="checkbox" id="ignoreSpaces" checked style="display:none;">
+                    <input type="checkbox" id="ignoreFinalPeriod" checked style="display:none;">
+                    <input type="checkbox" id="ignoreArticles" style="display:none;">
+                    <input type="checkbox" id="ignoreNumbers" style="display:none;">
+                    <input type="checkbox" id="fuzzyMatch" style="display:none;">
+                    <input type="checkbox" id="compareAlternatives" style="display:none;">
                 </div>
                 
                 <div class="stats" id="stats" style="display: none;">
@@ -787,15 +563,16 @@
                 </h2>
                 
                 <div class="action-buttons">
+                    <button class="btn btn-warning" id="keepOnePerGroupBtn" disabled>
+                        <i class="fas fa-check-circle"></i> Manter uma de cada grupo
+                    </button>
                     <button class="btn btn-success" id="removeSelectedBtn" disabled>
                         <i class="fas fa-trash-alt"></i> Remover Selecionadas
                     </button>
-                    
                     <button class="btn btn-danger" id="removeAllDuplicatesBtn" disabled>
                         <i class="fas fa-trash"></i> Remover Todas
                     </button>
-                    
-                    <button class="btn btn-warning" id="selectAllDuplicatesBtn" disabled>
+                    <button class="btn btn-info" id="selectAllDuplicatesBtn" disabled>
                         <i class="fas fa-check-double"></i> Selecionar Todas
                     </button>
                 </div>
@@ -837,6 +614,7 @@
             const batchFileInput = document.getElementById('batchFileInput');
             const findDuplicatesBtn = document.getElementById('findDuplicatesBtn');
             const clearBtn = document.getElementById('clearBtn');
+            const keepOnePerGroupBtn = document.getElementById('keepOnePerGroupBtn');
             const removeSelectedBtn = document.getElementById('removeSelectedBtn');
             const removeAllDuplicatesBtn = document.getElementById('removeAllDuplicatesBtn');
             const selectAllDuplicatesBtn = document.getElementById('selectAllDuplicatesBtn');
@@ -854,8 +632,10 @@
             const errorAlert = document.getElementById('errorAlert');
             const successMessage = document.getElementById('successMessage');
             const errorMessage = document.getElementById('errorMessage');
-            const progressBar = document.getElementById('progressBar');
+            const progressContainer = document.getElementById('progressContainer');
             const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            const progressStatus = document.getElementById('progressStatus');
             const qualityReport = document.getElementById('qualityReport');
             const qualityList = document.getElementById('qualityList');
             const undoBtn = document.getElementById('undoBtn');
@@ -865,7 +645,7 @@
             const batchMode = document.getElementById('batchMode');
             const processBatchBtn = document.getElementById('processBatchBtn');
             
-            // Opções de comparação
+            // Opções de comparação (ocultas, mas todas marcadas como padrão)
             const ignoreAccents = document.getElementById('ignoreAccents');
             const ignoreCase = document.getElementById('ignoreCase');
             const ignorePunctuation = document.getElementById('ignorePunctuation');
@@ -875,6 +655,17 @@
             const ignoreNumbers = document.getElementById('ignoreNumbers');
             const fuzzyMatch = document.getElementById('fuzzyMatch');
             const compareAlternatives = document.getElementById('compareAlternatives');
+            
+            // Forçar todas as opções básicas como marcadas (padrão)
+            ignoreAccents.checked = true;
+            ignoreCase.checked = true;
+            ignorePunctuation.checked = true;
+            ignoreSpaces.checked = true;
+            ignoreFinalPeriod.checked = true;
+            ignoreArticles.checked = false;
+            ignoreNumbers.checked = false;
+            fuzzyMatch.checked = false;
+            compareAlternatives.checked = false;
             
             // Armazenamento
             let currentQuestions = [];
@@ -890,6 +681,19 @@
             if (darkTheme) {
                 document.body.classList.add('dark-theme');
                 themeToggle.innerHTML = '<i class="fas fa-sun"></i> Tema';
+            }
+            
+            // Função para atualizar progresso
+            function updateProgress(percent, status) {
+                progressContainer.style.display = 'block';
+                progressFill.style.width = percent + '%';
+                progressText.textContent = percent + '%';
+                if (status) {
+                    progressStatus.textContent = status;
+                }
+                
+                // Permitir que a UI atualize
+                return new Promise(resolve => setTimeout(resolve, 10));
             }
             
             // Função para normalizar texto (APENAS PARA COMPARAÇÃO)
@@ -919,7 +723,7 @@
                 }
                 
                 if (ignoreArticles.checked) {
-                    normalized = normalized.replace(/\b(o|a|os|as|um|uma)\b/g, '');
+                    normalized = normalized.replace(/\b(o|a|os|as|um|uma)\b/gi, '');
                 }
                 
                 if (ignoreNumbers.checked) {
@@ -951,10 +755,10 @@
                 
                 const maxLen = Math.max(len1, len2);
                 const similarity = 1 - matrix[len1][len2] / maxLen;
-                return similarity > 0.9;
+                return similarity > 0.85; // Limiar de 85% de similaridade
             }
             
-            // Parse de questões - MANTÉM O TEXTO ORIGINAL
+            // Parse de questões
             function parseQuestions(text) {
                 try {
                     // Tenta parsear como JSON primeiro
@@ -962,18 +766,19 @@
                         try {
                             return JSON.parse(text);
                         } catch (e) {
-                            // Se falhar, continua
+                            // Se falhar, continua com o parse manual
+                            console.log('Falha no JSON, tentando parse manual');
                         }
                     }
                     
-                    // Parse manual preservando o texto exato
+                    // Parse manual mais robusto
                     const questions = [];
-                    const regex = /{q:\s*"((?:\\"|[^"])*)",\s*a:\s*\["((?:\\"|[^"])*)",\s*"((?:\\"|[^"])*)",\s*"((?:\\"|[^"])*)",\s*"((?:\\"|[^"])*)"\],\s*c:\s*(\d+)}/g;
+                    const regex = /{q:\s*"((?:\\"|[^"])*?)",\s*a:\s*\[\s*"((?:\\"|[^"])*?)"\s*,\s*"((?:\\"|[^"])*?)"\s*,\s*"((?:\\"|[^"])*?)"\s*,\s*"((?:\\"|[^])*?)"\s*\]\s*,\s*c:\s*(\d+)\s*}/g;
                     let match;
                     
                     while ((match = regex.exec(text)) !== null) {
                         questions.push({
-                            q: match[1].replace(/\\"/g, '"'), // Restaura aspas escapadas
+                            q: match[1].replace(/\\"/g, '"'),
                             a: [
                                 match[2].replace(/\\"/g, '"'),
                                 match[3].replace(/\\"/g, '"'),
@@ -992,14 +797,12 @@
                     
                 } catch (error) {
                     console.error('Erro no parse:', error);
-                    throw new Error('Não foi possível interpretar o formato');
+                    throw new Error('Não foi possível interpretar o formato: ' + error.message);
                 }
             }
             
-            // Função para gerar string SEM ALTERAR o texto original
+            // Função para gerar string
             function generateQuestionString(question) {
-                // Preserva exatamente o texto, incluindo barras invertidas originais
-                // Mas escapa aspas corretamente
                 const escapeQuotes = (str) => str.replace(/"/g, '\\"');
                 
                 return `{q: "${escapeQuotes(question.q)}", a: ["${escapeQuotes(question.a[0])}", "${escapeQuotes(question.a[1])}", "${escapeQuotes(question.a[2])}", "${escapeQuotes(question.a[3])}"], c: ${question.c}}`;
@@ -1035,36 +838,11 @@
             // Cache
             function saveToCache() {
                 localStorage.setItem('lastQuestions', jsonInput.value);
-                localStorage.setItem('lastOptions', JSON.stringify({
-                    ignoreAccents: ignoreAccents.checked,
-                    ignoreCase: ignoreCase.checked,
-                    ignorePunctuation: ignorePunctuation.checked,
-                    ignoreSpaces: ignoreSpaces.checked,
-                    ignoreFinalPeriod: ignoreFinalPeriod.checked,
-                    ignoreArticles: ignoreArticles.checked,
-                    ignoreNumbers: ignoreNumbers.checked,
-                    fuzzyMatch: fuzzyMatch.checked,
-                    compareAlternatives: compareAlternatives.checked
-                }));
             }
             
             function loadFromCache() {
                 const saved = localStorage.getItem('lastQuestions');
                 if (saved) jsonInput.value = saved;
-                
-                const options = localStorage.getItem('lastOptions');
-                if (options) {
-                    const opts = JSON.parse(options);
-                    ignoreAccents.checked = opts.ignoreAccents ?? true;
-                    ignoreCase.checked = opts.ignoreCase ?? true;
-                    ignorePunctuation.checked = opts.ignorePunctuation ?? true;
-                    ignoreSpaces.checked = opts.ignoreSpaces ?? true;
-                    ignoreFinalPeriod.checked = opts.ignoreFinalPeriod ?? true;
-                    ignoreArticles.checked = opts.ignoreArticles ?? false;
-                    ignoreNumbers.checked = opts.ignoreNumbers ?? false;
-                    fuzzyMatch.checked = opts.fuzzyMatch ?? false;
-                    compareAlternatives.checked = opts.compareAlternatives ?? false;
-                }
             }
             
             // Histórico
@@ -1103,15 +881,6 @@
                 redoBtn.disabled = historyIndex >= history.length - 1;
             }
             
-            function showProgress(percent) {
-                progressBar.style.display = 'block';
-                progressFill.style.width = percent + '%';
-                
-                if (percent >= 100) {
-                    setTimeout(() => progressBar.style.display = 'none', 500);
-                }
-            }
-            
             // Buscar duplicatas
             async function findDuplicates() {
                 try {
@@ -1121,11 +890,18 @@
                         return;
                     }
                     
-                    showProgress(10);
+                    await updateProgress(5, 'Analisando formato...');
+                    await new Promise(resolve => setTimeout(resolve, 50));
                     
                     currentQuestions = parseQuestions(text);
                     
-                    showProgress(30);
+                    if (!currentQuestions || currentQuestions.length === 0) {
+                        showError('Nenhuma questão encontrada');
+                        progressContainer.style.display = 'none';
+                        return;
+                    }
+                    
+                    await updateProgress(20, 'Validando questões...');
                     
                     const issues = validateQuestions(currentQuestions);
                     if (issues.length > 0) {
@@ -1135,34 +911,48 @@
                         qualityReport.style.display = 'none';
                     }
                     
-                    if (currentQuestions.length === 0) {
-                        showError('Nenhuma questão encontrada');
-                        return;
-                    }
-                    
-                    showProgress(50);
+                    await updateProgress(30, 'Organizando dados...');
                     
                     const questionMap = new Map();
+                    const totalQuestions = currentQuestions.length;
                     
-                    currentQuestions.forEach((question, index) => {
-                        let normalizedQ = normalizeText(question.q);
+                    const batchSize = 100;
+                    for (let i = 0; i < currentQuestions.length; i += batchSize) {
+                        const batch = currentQuestions.slice(i, i + batchSize);
                         
-                        if (compareAlternatives.checked) {
-                            const altText = question.a.map(a => normalizeText(a)).join('|');
-                            normalizedQ += '|' + altText;
-                        }
-                        
-                        if (!questionMap.has(normalizedQ)) {
-                            questionMap.set(normalizedQ, []);
-                        }
-                        
-                        questionMap.get(normalizedQ).push({
-                            ...question,
-                            originalIndex: index
+                        batch.forEach((question, batchIndex) => {
+                            const globalIndex = i + batchIndex;
+                            
+                            let normalizedQ = normalizeText(question.q);
+                            
+                            if (compareAlternatives.checked) {
+                                const altText = question.a.map(a => normalizeText(a)).join('|');
+                                normalizedQ += '|' + altText;
+                            }
+                            
+                            if (!normalizedQ || normalizedQ.trim() === '') {
+                                normalizedQ = 'questao_' + globalIndex;
+                            }
+                            
+                            if (!questionMap.has(normalizedQ)) {
+                                questionMap.set(normalizedQ, []);
+                            }
+                            
+                            questionMap.get(normalizedQ).push({
+                                ...question,
+                                originalIndex: globalIndex
+                            });
                         });
-                    });
+                        
+                        const progress = 30 + Math.floor((i + batch.length) / totalQuestions * 40);
+                        await updateProgress(progress, `Processando questões ${Math.min(i + batch.length, totalQuestions)}/${totalQuestions}...`);
+                        
+                        await new Promise(resolve => setTimeout(resolve, 10));
+                    }
                     
                     if (fuzzyMatch.checked) {
+                        await updateProgress(70, 'Aplicando similaridade fuzzy...');
+                        
                         const keys = Array.from(questionMap.keys());
                         for (let i = 0; i < keys.length; i++) {
                             for (let j = i + 1; j < keys.length; j++) {
@@ -1175,10 +965,14 @@
                                     j--;
                                 }
                             }
+                            
+                            if (i % 10 === 0) {
+                                await updateProgress(70 + Math.floor(i / keys.length * 10), 'Agrupando similares...');
+                            }
                         }
                     }
                     
-                    showProgress(80);
+                    await updateProgress(85, 'Organizando grupos...');
                     
                     duplicateGroups = Array.from(questionMap.entries())
                         .filter(([_, questions]) => questions.length > 1)
@@ -1190,7 +984,7 @@
                     const total = currentQuestions.length;
                     const duplicateTotal = duplicateGroups.reduce((acc, group) => acc + group.questions.length, 0);
                     const unique = total - duplicateTotal + duplicateGroups.length;
-                    const percent = ((duplicateTotal / total) * 100).toFixed(1);
+                    const percent = total > 0 ? ((duplicateTotal / total) * 100).toFixed(1) : '0';
                     
                     totalQuestionsSpan.textContent = total;
                     duplicateGroupsSpan.textContent = duplicateGroups.length;
@@ -1200,7 +994,7 @@
                     
                     stats.style.display = 'grid';
                     
-                    showProgress(100);
+                    await updateProgress(95, 'Renderizando resultados...');
                     
                     renderDuplicates();
                     updatePreview();
@@ -1208,15 +1002,22 @@
                     
                     addToHistory(currentQuestions);
                     
+                    await updateProgress(100, 'Concluído!');
+                    
                     if (duplicateGroups.length === 0) {
                         showSuccess('Nenhuma duplicata encontrada');
                     } else {
                         showSuccess(`${duplicateGroups.length} grupos com ${duplicateTotal} duplicatas`);
                     }
                     
+                    setTimeout(() => {
+                        progressContainer.style.display = 'none';
+                    }, 1000);
+                    
                 } catch (error) {
+                    console.error('Erro detalhado:', error);
                     showError('Erro: ' + error.message);
-                    progressBar.style.display = 'none';
+                    progressContainer.style.display = 'none';
                 }
             }
             
@@ -1240,15 +1041,7 @@
                             <div class="group-header">
                                 <div>
                                     <i class="fas fa-copy"></i> 
-                                    Grupo ${groupIndex + 1} (${group.questions.length})
-                                </div>
-                                <div class="group-actions">
-                                    <button class="btn btn-success btn-sm select-all-group" data-group-index="${groupIndex}">
-                                        Selecionar
-                                    </button>
-                                    <button class="btn btn-danger btn-sm remove-group" data-group-index="${groupIndex}">
-                                        Remover
-                                    </button>
+                                    Grupo ${groupIndex + 1} (${group.questions.length} questões)
                                 </div>
                             </div>
                             <div class="question-items">
@@ -1287,24 +1080,6 @@
                 
                 duplicatesContainer.innerHTML = html;
                 
-                document.querySelectorAll('.select-all-group').forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        const groupIndex = this.dataset.groupIndex;
-                        document.querySelectorAll(`.duplicate-checkbox[data-group-index="${groupIndex}"]`).forEach(cb => {
-                            cb.checked = true;
-                        });
-                        updateButtonsState();
-                    });
-                });
-                
-                document.querySelectorAll('.remove-group').forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        removeGroup(parseInt(this.dataset.groupIndex));
-                    });
-                });
-                
                 document.querySelectorAll('.duplicate-checkbox').forEach(cb => {
                     cb.addEventListener('change', updateButtonsState);
                 });
@@ -1316,7 +1091,29 @@
                 return div.innerHTML;
             }
             
-            // Função para atualizar preview - PRESERVA O TEXTO ORIGINAL
+            // Função para manter uma questão de cada grupo (botão principal)
+            function keepOnePerGroup() {
+                if (duplicateGroups.length === 0) return;
+                
+                const indicesToKeep = new Set();
+                const seen = new Set();
+                
+                // Para cada grupo, manter apenas a primeira questão
+                currentQuestions.forEach((q, index) => {
+                    const key = normalizeText(q.q);
+                    if (!seen.has(key)) {
+                        seen.add(key);
+                        indicesToKeep.add(index);
+                    }
+                });
+                
+                currentQuestions = currentQuestions.filter((_, index) => indicesToKeep.has(index));
+                
+                updateTextareaFromCurrent();
+                findDuplicates();
+                showSuccess('Mantida uma questão de cada grupo');
+            }
+            
             function updatePreview() {
                 if (currentQuestions.length > 0) {
                     let output = '[\n';
@@ -1340,15 +1137,6 @@
                     copyOutputBtn.disabled = true;
                     exportBtn.disabled = true;
                 }
-            }
-            
-            function removeGroup(groupIndex) {
-                const group = duplicateGroups[groupIndex];
-                const indicesToRemove = group.questions.map(q => q.originalIndex);
-                currentQuestions = currentQuestions.filter((_, index) => !indicesToRemove.includes(index));
-                updateTextareaFromCurrent();
-                findDuplicates();
-                showSuccess('Grupo removido');
             }
             
             function removeSelected() {
@@ -1392,8 +1180,12 @@
                 updateButtonsState();
             }
             
-            // Função para atualizar textarea - PRESERVA O TEXTO ORIGINAL
             function updateTextareaFromCurrent() {
+                if (currentQuestions.length === 0) {
+                    jsonInput.value = '';
+                    return;
+                }
+                
                 let output = '[\n';
                 
                 currentQuestions.forEach((q, index) => {
@@ -1415,6 +1207,7 @@
                 const hasDuplicates = duplicateGroups.length > 0;
                 const hasSelected = document.querySelectorAll('.duplicate-checkbox:checked').length > 0;
                 
+                keepOnePerGroupBtn.disabled = !hasDuplicates;
                 removeSelectedBtn.disabled = !hasSelected;
                 removeAllDuplicatesBtn.disabled = !hasDuplicates;
                 selectAllDuplicatesBtn.disabled = !hasDuplicates;
@@ -1428,8 +1221,12 @@
             function copyPreview() {
                 outputPreview.select();
                 outputPreview.setSelectionRange(0, 99999);
-                navigator.clipboard.writeText(outputPreview.value);
-                showSuccess('Copiado!');
+                navigator.clipboard.writeText(outputPreview.value).then(() => {
+                    showSuccess('Copiado!');
+                }).catch(() => {
+                    document.execCommand('copy');
+                    showSuccess('Copiado!');
+                });
             }
             
             function exportJson() {
@@ -1456,7 +1253,7 @@
                 reader.readAsText(file);
             }
             
-            function processBatch() {
+            async function processBatch() {
                 const files = batchFileInput.files;
                 if (files.length === 0) {
                     showError('Selecione arquivos');
@@ -1466,35 +1263,53 @@
                 let allQuestions = [];
                 let filesProcessed = 0;
                 
-                showProgress(0);
+                await updateProgress(0, 'Iniciando processamento batch...');
                 
-                Array.from(files).forEach((file) => {
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    
+                    try {
+                        const text = await readFileAsync(file);
+                        const questions = parseQuestions(text);
+                        allQuestions = [...allQuestions, ...questions];
+                        
+                        filesProcessed++;
+                        const progress = Math.floor((filesProcessed / files.length) * 100);
+                        await updateProgress(progress, `Processando ${file.name} (${filesProcessed}/${files.length})...`);
+                        
+                    } catch (error) {
+                        showError(`Erro em ${file.name}: ${error.message}`);
+                    }
+                }
+                
+                await updateProgress(80, 'Removendo duplicatas entre arquivos...');
+                
+                const unique = new Map();
+                allQuestions.forEach((q) => {
+                    const key = normalizeText(q.q);
+                    if (!unique.has(key)) unique.set(key, q);
+                });
+                
+                currentQuestions = Array.from(unique.values());
+                updateTextareaFromCurrent();
+                
+                await updateProgress(95, 'Analisando resultado...');
+                
+                await findDuplicates();
+                
+                showSuccess(`${currentQuestions.length} questões únicas`);
+                batchMode.style.display = 'none';
+                
+                setTimeout(() => {
+                    progressContainer.style.display = 'none';
+                }, 1000);
+            }
+            
+            function readFileAsync(file) {
+                return new Promise((resolve, reject) => {
                     const reader = new FileReader();
-                    reader.onload = (e) => {
-                        try {
-                            const questions = parseQuestions(e.target.result);
-                            allQuestions = [...allQuestions, ...questions];
-                            
-                            filesProcessed++;
-                            showProgress((filesProcessed / files.length) * 100);
-                            
-                            if (filesProcessed === files.length) {
-                                const unique = new Map();
-                                allQuestions.forEach((q) => {
-                                    const key = normalizeText(q.q);
-                                    if (!unique.has(key)) unique.set(key, q);
-                                });
-                                
-                                currentQuestions = Array.from(unique.values());
-                                updateTextareaFromCurrent();
-                                findDuplicates();
-                                showSuccess(`${currentQuestions.length} questões únicas`);
-                                batchMode.style.display = 'none';
-                            }
-                        } catch (error) {
-                            showError(`Erro em ${file.name}`);
-                        }
-                    };
+                    reader.onload = (e) => resolve(e.target.result);
+                    reader.onerror = (e) => reject(e.target.error);
                     reader.readAsText(file);
                 });
             }
@@ -1553,6 +1368,7 @@
             // Event listeners
             findDuplicatesBtn.addEventListener('click', findDuplicates);
             clearBtn.addEventListener('click', clearAll);
+            keepOnePerGroupBtn.addEventListener('click', keepOnePerGroup);
             removeSelectedBtn.addEventListener('click', removeSelected);
             removeAllDuplicatesBtn.addEventListener('click', removeAllDuplicates);
             selectAllDuplicatesBtn.addEventListener('click', selectAllDuplicates);
